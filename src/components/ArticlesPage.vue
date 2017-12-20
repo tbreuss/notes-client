@@ -7,27 +7,25 @@
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <div class="loading" v-if="loading">
-                    Lade...
-                </div>
-                <div v-else>
-                    <span v-if="articles.length==0">Keine Artikel gefunden</span>
-                    <div class="list-group" v-if="articles.length>0">
-                        <span>Zeige {{ pagingFrom }} bis {{ pagingTo }} von {{ paging.totalItems }} Artikel</span>
-                        <router-link v-for="article in articles" :to="'/article/' + article.id"
-                                     class="list-group-item list-group-item-action" :key="article.id">
-                            {{ article.title }}<br>
-                            <article-tags :tags="article.tags"></article-tags>
-                        </router-link>
-                        <nav style="margin-top:20px">
-                            <ul class="pagination justify-content-center">
-                                <li v-bind:class="{ disabled: paging.currentPage <= 1, 'page-item': true}"><a
-                                        class="page-link" @click="loadPrevPage" href="#">Vorherige Seite</a></li>
-                                <li v-bind:class="{ disabled: paging.currentPage >= paging.pageCount, 'page-item': true}">
-                                    <a class="page-link" @click="loadNextPage" href="#">Nächste Seite</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                <span v-if="articles.length>0"else>Zeige {{ pagingFrom }} bis {{ pagingTo }} von {{ paging.totalItems }} Artikel</span>
+                <span v-if="!loading && articles.length==0">Keine Artikel gefunden</span>
+                <span class="loading" v-if="loading">
+                        ...lade Daten
+                </span>
+                <div class="list-group">
+                    <router-link v-for="article in articles" :to="'/article/' + article.id"
+                                 class="list-group-item list-group-item-action" :key="article.id">
+                        {{ article.title }}<br>
+                        <article-tags :tags="article.tags"></article-tags>
+                    </router-link>
+                    <nav style="margin-top:20px" v-if="paging.pageCount>1">
+                        <ul class="pagination justify-content-center">
+                            <li v-bind:class="{ disabled: paging.currentPage <= 1, 'page-item': true}"><a
+                                    class="page-link" @click="loadPrevPage" href="#">Vorherige Seite</a></li>
+                            <li v-bind:class="{ disabled: paging.currentPage >= paging.pageCount, 'page-item': true}">
+                                <a class="page-link" @click="loadNextPage" href="#">Nächste Seite</a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -76,7 +74,7 @@
                 sort: this.getSort(),
                 page: this.getPage(),
                 paging: {},
-                selectedTags: []
+                selectedTags: [],
             }
         },
         computed: {

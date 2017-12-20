@@ -7,19 +7,17 @@
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <div class="loading" v-if="loading">
-                    Lade...
-                </div>
-                <div v-else>
-                    <span v-if="tags.length>0">Zeige {{ tags.length }} Tags</span>
-                    <ul class="list-group">
-                        <router-link v-for="tag in tags" :to="'/articles'"
-                                     class="list-group-item d-flex justify-content-between align-items-center" :key="tag.id">
-                            {{ tag.name}}
-                            <span class="badge badge-secondary badge-pill">{{ tag.frequency }}</span>
-                        </router-link>
-                    </ul>
-                </div>
+                <span v-if="tags.length>0">Zeige {{ tags.length }} Tags</span>
+                <span class="loading" v-if="loading">
+                    ...lade Daten
+                </span>
+                <ul class="list-group">
+                    <a v-for="tag in tags" @click="toArticles(tag.name, $event)" href="#"
+                                 class="list-group-item d-flex justify-content-between align-items-center" :key="tag.id">
+                        {{ tag.name}}
+                        <span class="badge badge-secondary badge-pill">{{ tag.frequency }}</span>
+                    </a>
+                </ul>
             </div>
             <div class="col-lg-4">
 
@@ -79,6 +77,12 @@
                     .catch(e => {
                         console.error(e)
                     })
+            },
+            toArticles: function (tag, e) {
+                e.preventDefault()
+                sessionStorage.setObj('xxx', ["a", "b", "c"])
+                console.log(sessionStorage.getObj('xxx'));
+                console.log(tag)
             }
         },
         created: function () {
