@@ -74,7 +74,7 @@
                 sort: this.getSort(),
                 page: this.getPage(),
                 paging: {},
-                selectedTags: [],
+                selectedTags: this.getSelectedTags(),
             }
         },
         computed: {
@@ -137,6 +137,7 @@
                 HTTP.get('selectedtags', {params: params})
                     .then(response => {
                         this.tags = response.data
+                        sessionStorage.setObj('ArticlesPage.selectedTags', this.selectedTags)
                     })
                     .catch(e => {
                         console.error(e)
@@ -160,6 +161,12 @@
                 }
                 return 'title'
             },
+            getSelectedTags: function() {
+                if (sessionStorage.getObj('ArticlesPage.selectedTags')) {
+                    return sessionStorage.getObj('ArticlesPage.selectedTags');
+                }
+                return [];
+            }
         },
         created: function () {
             this.loadData()

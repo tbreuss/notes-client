@@ -80,9 +80,8 @@
             },
             toArticles: function (tag, e) {
                 e.preventDefault()
-                sessionStorage.setObj('xxx', ["a", "b", "c"])
-                console.log(sessionStorage.getObj('xxx'));
-                console.log(tag)
+                sessionStorage.setObj('ArticlesPage.selectedTags', [tag])
+                this.$router.push('/articles')
             }
         },
         created: function () {
