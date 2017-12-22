@@ -42,8 +42,20 @@
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
+                        <input @change="loadData" class="form-check-input" type="radio" value="popular" v-model="sort">
+                        Beliebtheit
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
                         <input @change="loadData" class="form-check-input" type="radio" value="changed" v-model="sort">
                         Letzter Änderung
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input @change="loadData" class="form-check-input" type="radio" value="created" v-model="sort">
+                        Letzter Eintrag
                     </label>
                 </div>
 

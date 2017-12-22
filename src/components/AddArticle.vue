@@ -14,10 +14,11 @@
         <div class="form-group">
             <label for="content">Content</label>
             <textarea v-model="article.content" :class="getClass('content')" id="content" rows="10" cols="10"></textarea>
+            <small class="float-right">
+                <button type="button" class="btn btn-sm btn-link" data-toggle="modal" data-target="#previewModal">Vorschau</button>
+            </small>
+            <small id="contentHelp" class="form-text text-muted">Markdown-Syntax</small>
             <div class="invalid-feedback">{{ errors.content }}</div>
-        </div>
-        <div class="form-group">
-            <vue-markdown :source="article.content"></vue-markdown>
         </div>
         <div class="form-group">
             <label for="tags">Tags</label>
@@ -26,6 +27,27 @@
         </div>
         <button type="button" class="btn btn-primary" @click="submit" ref="submit">Speichern</button>
         <button type="button" class="btn btn-link" @click="reset" ref="reset">Zurücksetzen</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="previewModalLabel">Vorschau: {{ article.title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div v-if="article.content.trim()==''">Kein Content erfasst</div>
+                        <vue-markdown v-else :source="article.content"></vue-markdown>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Schliessen</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
