@@ -23,6 +23,7 @@
         <div class="form-group">
             <label for="tags">Tags</label>
             <input v-model="article.tags" type="text" :class="getClass('tags')" id="tags">
+            <small id="tagsHelp" class="form-text text-muted">Mehrere Tags kommagetrennt</small>
             <div class="invalid-feedback">{{ errors.tags }}</div>
         </div>
         <button type="button" class="btn btn-primary" @click="submit" ref="submit">Speichern</button>
