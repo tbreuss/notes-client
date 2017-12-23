@@ -3,8 +3,8 @@
 import axios from 'axios';
 
 var instance = axios.create({
-    baseURL: 'http://testing.tebe.ch/wissen-api/public/api.php/',
-    //baseURL: 'http://localhost:8999/api.php/',
+    //baseURL: 'http://testing.tebe.ch/wissen-api/public/api.php/',
+    baseURL: 'http://localhost:9999/api.php/',
     headers: {
         //Authorization: 'Bearer {token}'
     }
