@@ -5,12 +5,11 @@
 </template>
 
 <script>
-    export default {
+  export default {
 
-        props: ['tags'],
-        methods: {
-        }
-    }
+    props: ['tags'],
+    methods: {}
+  }
 
 </script>
 

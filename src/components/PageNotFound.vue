@@ -5,11 +5,10 @@
 </template>
 
 <script>
-    import {HTTP} from '../http';
-    import {markdown} from 'markdown';
+  import { HTTP } from '../http'
+  import { markdown } from 'markdown'
 
-    export default {
-    }
+  export default {}
 
 </script>
 

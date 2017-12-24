@@ -12,6 +12,9 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/add-article">Neu</router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/login">Login</router-link>
+                    </li>
                 </ul>
             </nav>
             <h3 class="text-muted">
@@ -28,9 +31,9 @@
 </template>
 
 <script>
-    export default {
-        name: 'app'
-    }
+  export default {
+    name: 'app'
+  }
 </script>
 
 <style scoped>

@@ -11,40 +11,40 @@ import TagsPage from '@/components/TagsPage'
 Vue.use(Router)
 
 export default new Router({
-    routes: [
-        {
-            path: '/',
-            component: StartPage
-        },
-        {
-            path: '/articles',
-            component: ArticlesPage
-        },
-        {
-            path: '/article/:id',
-            component: ArticlePage,
-            props: true
-        },
-        {
-            path: '/add-article',
-            component: AddArticle
-        },
-        {
-            path: '/tags',
-            component: TagsPage
-        },
-        {
-            path: '/login',
-            component: LoginPage
-        },
-        {
-            path: '/404',
-            component: PageNotFound
-        },
-        {
-            path: '*',
-            redirect: '/404'
-        },
+  routes: [
+    {
+      path: '/',
+      component: StartPage
+    },
+    {
+      path: '/articles',
+      component: ArticlesPage
+    },
+    {
+      path: '/article/:id',
+      component: ArticlePage,
+      props: true
+    },
+    {
+      path: '/add-article',
+      component: AddArticle
+    },
+    {
+      path: '/tags',
+      component: TagsPage
+    },
+    {
+      path: '/login',
+      component: LoginPage
+    },
+    {
+      path: '/404',
+      component: PageNotFound
+    },
+    {
+      path: '*',
+      redirect: '/404'
+    },
 
-    ]
+  ]
 })

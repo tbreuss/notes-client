@@ -13,9 +13,12 @@
         </div>
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea v-model="article.content" :class="getClass('content')" id="content" rows="10" cols="10"></textarea>
+            <textarea v-model="article.content" :class="getClass('content')" id="content" rows="10"
+                      cols="10"></textarea>
             <small class="float-right">
-                <button type="button" class="btn btn-sm btn-link" data-toggle="modal" data-target="#previewModal">Vorschau</button>
+                <button type="button" class="btn btn-sm btn-link" data-toggle="modal" data-target="#previewModal">
+                    Vorschau
+                </button>
             </small>
             <small id="contentHelp" class="form-text text-muted">Markdown-Syntax</small>
             <div class="invalid-feedback">{{ errors.content }}</div>
@@ -30,7 +33,8 @@
         <button type="button" class="btn btn-link" @click="reset" ref="reset">Zurücksetzen</button>
 
         <!-- Modal -->
-        <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -53,72 +57,76 @@
 </template>
 
 <script>
-    import {HTTP} from '../http';
+  import { HTTP } from '../http'
 
-    export default {
-        data() {
-            return {
-                article: {
-                    title: '',
-                    abstract: '',
-                    content: '',
-                    tags: ''
-                },
-                errors: {},
-                formSent: false
-            }
+  export default {
+    data () {
+      return {
+        article: {
+          title: '',
+          abstract: '',
+          content: '',
+          tags: ''
         },
-        computed: {},
-        methods: {
-            reset: function () {
-                this.formSent = false
-                this.article = {
-                    title: '',
-                    abstract: '',
-                    content: '',
-                    tags: ''
-                }
-            },
-            submit: function () {
-                this.$refs.reset.disabled = true
-                this.$refs.submit.disabled = true
-                this.formSent = true
-                var config = {
-                    headers: {
-                        'Content-type': 'application/x-www-form-urlencoded'
-                    }
-                }
-                HTTP.post('add-article', this.article, config)
-                    .then(response => {
-                        this.$refs.reset.disabled = false
-                        this.$refs.submit.disabled = false
-                        var success = response.data.success
-                        if (!success) {
-                            this.errors = response.data.errors
-                        } else {
-                            this.$router.push('/articles')
-                        }
-                    })
-                    .catch(e => {
-                        console.error(e)
-                    })
-            },
-            getClass: function (field) {
-                if (!this.formSent) {
-                    return 'form-control'
-                }
-                if (field in this.errors) {
-                    return 'form-control is-invalid'
-                }
-                return 'form-control is-valid'
-            }
-        },
-        created: function () {
-            this.$nextTick(function () {
-                this.$refs.title.focus()
-            })
+        errors: {},
+        formSent: false
+      }
+    },
+    computed: {},
+    methods: {
+      reset: function () {
+        this.formSent = false
+        this.article = {
+          title: '',
+          abstract: '',
+          content: '',
+          tags: ''
         }
+      },
+      submit: function () {
+        this.$refs.reset.disabled = true
+        this.$refs.submit.disabled = true
+        this.formSent = true
+        var config = {
+          headers: {
+            'Content-type': 'application/x-www-form-urlencoded'
+          }
+        }
+        HTTP.post('add-article', this.article, config)
+          .then(response => {
+            this.$refs.reset.disabled = false
+            this.$refs.submit.disabled = false
+            var success = response.data.success
+            if (!success) {
+              this.errors = response.data.errors
+            } else {
+              this.$router.push('/articles')
+            }
+          })
+          .catch(e => {
+            console.error(e)
+          })
+      },
+      getClass: function (field) {
+        if (!this.formSent) {
+          return 'form-control'
+        }
+        if (field in this.errors) {
+          return 'form-control is-invalid'
+        }
+        return 'form-control is-valid'
+      }
+    },
+    created: function () {
+      this.$nextTick(function () {
+        var jwt = localStorage.getItem('token')
+        if (!jwt) {
+          this.$router.push('/login')
+        }
+        this.$refs.title.focus()
+      })
     }
+  }
 
 </script>
 
