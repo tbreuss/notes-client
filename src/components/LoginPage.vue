@@ -8,11 +8,11 @@
             <h4>Login</h4>
             <div class="form-group">
                 <label for="username">Benutzername</label>
-                <input v-model="form.username" type="text" :class="getClass('username')" id="username">
+                <input v-on:keyup.enter="login" v-model="form.username" type="text" :class="getClass('username')" id="username" ref="username">
             </div>
             <div class="form-group">
                 <label for="password">Passwort</label>
-                <input v-model="form.password" :class="getClass('password')" type="password" id="password">
+                <input v-on:keyup.enter="login" v-model="form.password" :class="getClass('password')" type="password" id="password">
             </div>
             <button type="button" class="btn btn-primary" @click="login" ref="loginBtn">Login</button>
             {{ errors }}
@@ -71,6 +71,9 @@
         var jwt = localStorage.getItem('token')
         return jwt ? true : false
       }
+    },
+    mounted() {
+      this.$refs.username.focus()
     }
   }
 </script>

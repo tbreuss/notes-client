@@ -117,14 +117,12 @@
         return 'form-control is-valid'
       }
     },
-    created: function () {
-      this.$nextTick(function () {
-        var jwt = localStorage.getItem('token')
-        if (!jwt) {
-          this.$router.push('/login')
-        }
-        this.$refs.title.focus()
-      })
+    mounted: function () {
+      var jwt = localStorage.getItem('token')
+      if (!jwt) {
+        this.$router.push('/login')
+      }
+      this.$refs.title.focus()
     }
   }
 
