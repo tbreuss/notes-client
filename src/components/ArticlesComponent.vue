@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import { HTTP } from '../http'
+  import { getSelectedArticles } from '../utils/api'
 
   export default {
     data () {
@@ -46,27 +46,15 @@
           return 'Die aktuellsten Artikel'
         }
         return ''
-      },
-      endpoint: function () {
-        if (this.mode == 'popular') {
-          return 'popular'
-        }
-        if (this.mode == 'latest') {
-          return 'latest'
-        }
-        if (this.mode == 'modified') {
-          return 'modified'
-        }
-        return 'latest'
       }
     },
     props: ['mode'],
     methods: {
       loadData: function () {
         this.loading = true
-        HTTP.get(this.endpoint)
-          .then(response => {
-            this.articles = response.data
+        getSelectedArticles(this.mode)
+          .then(articles => {
+            this.articles = articles
             this.loading = false
           })
           .catch(e => {

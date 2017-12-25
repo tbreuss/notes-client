@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import { HTTP } from '../http'
+  import { getTags } from '../utils/api'
 
   export default {
     data () {
@@ -75,14 +75,14 @@
         var params = {
           sort: this.sort
         }
-        HTTP.get('tags', {params: params})
-          .then(response => {
-            this.tags = response.data
+        getTags(params)
+          .then((tags) => {
+            this.tags = tags
             this.loading = false
             sessionStorage.setItem('TagsPage.sort', this.sort)
           })
-          .catch(e => {
-            console.error(e)
+          .catch(error => {
+            console.error(error)
           })
       },
       toArticles: function (tag, e) {

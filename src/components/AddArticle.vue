@@ -57,7 +57,7 @@
 </template>
 
 <script>
-  import { HTTP } from '../http'
+  import { postArticle } from '../utils/api'
 
   export default {
     data () {
@@ -87,24 +87,16 @@
         this.$refs.reset.disabled = true
         this.$refs.submit.disabled = true
         this.formSent = true
-        var config = {
-          headers: {
-            'Content-type': 'application/x-www-form-urlencoded'
-          }
-        }
-        HTTP.post('add-article', this.article, config)
-          .then(response => {
+        postArticle(this.article)
+          .then(() => {
             this.$refs.reset.disabled = false
             this.$refs.submit.disabled = false
-            var success = response.data.success
-            if (!success) {
-              this.errors = response.data.errors
-            } else {
-              this.$router.push('/articles')
-            }
+            this.$router.push('/articles')
           })
-          .catch(e => {
-            console.error(e)
+          .catch(error => {
+            this.errors = error.response.data
+            this.$refs.reset.disabled = false
+            this.$refs.submit.disabled = false
           })
       },
       getClass: function (field) {

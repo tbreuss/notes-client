@@ -75,7 +75,8 @@
 </template>
 
 <script>
-  import { HTTP } from '../http'
+
+  import { getArticles, getSelectedTags } from '../utils/api'
 
   export default {
     name: 'ArticlesPage',
@@ -116,10 +117,10 @@
         }
         params.page = this.page
         this.loading = true
-        HTTP.get('articles', {params: params})
-          .then(response => {
-            this.articles = response.data.articles
-            this.paging = response.data.paging
+        getArticles(params)
+          .then(data => {
+            this.articles = data.articles
+            this.paging = data.paging
             this.loading = false
             sessionStorage.setItem('ArticlesPage.page', this.page)
             sessionStorage.setItem('ArticlesPage.q', this.q)
@@ -148,13 +149,13 @@
         if (this.selectedTags) {
           params.tags = this.selectedTags
         }
-        HTTP.get('selectedtags', {params: params})
-          .then(response => {
-            this.tags = response.data
+        getSelectedTags(params)
+          .then((tags) => {
+            this.tags = tags
             sessionStorage.setObj('ArticlesPage.selectedTags', this.selectedTags)
           })
-          .catch(e => {
-            console.error(e)
+          .catch(error => {
+            console.error(error)
           })
       },
       getPage: function () {

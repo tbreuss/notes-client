@@ -17,7 +17,7 @@
 </template>
 
 <script>
-  import { HTTP } from '../http'
+  import { getArticle } from '../utils/api'
 
   export default {
     props: ['id'],
@@ -29,9 +29,9 @@
     },
     created: function () {
       this.loading = true
-      HTTP.get('articles/' + this.id)
-        .then(response => {
-          this.article = response.data
+      getArticle(this.id)
+        .then(article => {
+          this.article = article
           this.loading = false
         })
         .catch(e => {

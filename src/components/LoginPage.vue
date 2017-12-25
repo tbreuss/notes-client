@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import { HTTP } from '../http'
+  import { postLogin } from '../utils/api'
 
   export default {
     name: 'LoginPage',
@@ -38,15 +38,10 @@
     },
     methods: {
       login () {
-        var config = {
-          headers: {
-            'Content-type': 'application/x-www-form-urlencoded'
-          }
-        }
-        HTTP.post('/auth/login', this.form, config)
-          .then(response => {
+        postLogin(this.form)
+          .then(token => {
+            localStorage.setItem('token', token)
             this.$refs.loginBtn.disabled = false
-            localStorage.setItem('token', response.data.token)
             this.$router.push('/add-article')
           })
           .catch(error => {
@@ -73,7 +68,9 @@
       }
     },
     mounted() {
-      this.$refs.username.focus()
+      if (!this.isAuthenticated) {
+        this.$refs.username.focus()
+      }
     }
   }
 </script>
