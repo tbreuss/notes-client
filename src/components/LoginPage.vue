@@ -8,12 +8,12 @@
             <h4>Login</h4>
             <div class="form-group">
                 <label for="username">Benutzername</label>
-                <input v-on:keyup.enter="login" v-model="form.username" type="text" :class="getClass('username')" id="username" v-focus>
+                <input v-on:focus="reset()" v-on:keyup.enter="login" v-model="form.username" type="text" :class="getClass('username')" id="username" v-focus>
                 <div class="invalid-feedback">{{ errors.username }}</div>
             </div>
             <div class="form-group">
                 <label for="password">Passwort</label>
-                <input v-on:keyup.enter="login" v-model="form.password" :class="getClass('password')" type="password" id="password">
+                <input v-on:focus="reset()" v-on:keyup.enter="login" v-model="form.password" :class="getClass('password')" type="password" id="password">
                 <div class="invalid-feedback">{{ errors.password }}</div>
             </div>
             <button type="button" class="btn btn-primary" @click="login" ref="loginBtn">Login</button>
@@ -48,6 +48,9 @@
           }
           this.formSent = true
         })
+      },
+      reset() {
+        this.formSent = false
       },
       getClass (field) {
         if (!this.formSent) {
