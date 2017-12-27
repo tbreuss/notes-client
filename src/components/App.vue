@@ -13,7 +13,8 @@
                         <router-link class="nav-link" to="/add-article">Neu</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/login">Login</router-link>
+                        <router-link v-if="loggedIn" to="/logout" class="nav-link">Logout</router-link>
+                        <router-link v-if="!loggedIn" to="/login" class="nav-link">Login</router-link>
                     </li>
                 </ul>
             </nav>
@@ -31,8 +32,18 @@
 </template>
 
 <script>
+  import auth from '@/utils/auth'
   export default {
-    name: 'app'
+    data () {
+      return {
+        loggedIn: auth.loggedIn()
+      }
+    },
+    created () {
+      auth.onChange = loggedIn => {
+        this.loggedIn = loggedIn
+      }
+    }
   }
 </script>
 

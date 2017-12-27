@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+Vue.use(Router)
+
+import auth from '@/utils/auth'
 import AddArticle from '@/components/AddArticle'
 import ArticlesPage from '@/components/ArticlesPage'
 import ArticlePage from '@/components/ArticlePage'
@@ -8,7 +12,16 @@ import PageNotFound from '@/components/PageNotFound'
 import StartPage from '@/components/StartPage'
 import TagsPage from '@/components/TagsPage'
 
-Vue.use(Router)
+function requireAuth (to, from, next) {
+  if (!auth.loggedIn()) {
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    })
+  } else {
+    next()
+  }
+}
 
 export default new Router({
   routes: [
@@ -27,7 +40,8 @@ export default new Router({
     },
     {
       path: '/add-article',
-      component: AddArticle
+      component: AddArticle,
+      beforeEnter: requireAuth
     },
     {
       path: '/tags',
@@ -36,6 +50,12 @@ export default new Router({
     {
       path: '/login',
       component: LoginPage
+    },
+    { path: '/logout',
+      beforeEnter (to, from, next) {
+        auth.logout()
+        next('/')
+      }
     },
     {
       path: '/404',

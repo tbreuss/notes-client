@@ -3,7 +3,7 @@
         <h4>Artikel hinzufügen</h4>
         <div class="form-group">
             <label for="title">Titel</label>
-            <input v-model="article.title" type="text" :class="getClass('title')" id="title" ref="title">
+            <input v-model="article.title" type="text" :class="getClass('title')" id="title" v-focus>
             <div class="invalid-feedback">{{ errors.title }}</div>
         </div>
         <div class="form-group">
@@ -108,13 +108,6 @@
         }
         return 'form-control is-valid'
       }
-    },
-    mounted: function () {
-      var jwt = localStorage.getItem('token')
-      if (!jwt) {
-        this.$router.push('/login')
-      }
-      this.$refs.title.focus()
     }
   }
 
