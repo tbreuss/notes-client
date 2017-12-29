@@ -4,13 +4,13 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 import auth from '@/utils/auth'
-import AddArticle from '@/components/AddArticle'
-import ArticlesPage from '@/components/ArticlesPage'
-import ArticlePage from '@/components/ArticlePage'
-import LoginPage from '@/components/LoginPage'
-import PageNotFound from '@/components/PageNotFound'
-import StartPage from '@/components/StartPage'
-import TagsPage from '@/components/TagsPage'
+import ArticleForm from '@/pages/ArticleForm'
+import Articles from '@/pages/Articles'
+import Article from '@/pages/Article'
+import Login from '@/pages/Login'
+import NotFound from '@/pages/NotFound'
+import Start from '@/pages/Start'
+import Tags from '@/pages/Tags'
 
 function requireAuth (to, from, next) {
   if (!auth.loggedIn()) {
@@ -27,36 +27,45 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: StartPage
+      name: 'start',
+      component: Start
     },
     {
       path: '/articles',
-      component: ArticlesPage
+      name: 'articles',
+      component: Articles
     },
     {
       path: '/article/:id',
-      component: ArticlePage,
+      name: 'article',
+      component: Article,
       props: true
     },
     {
-      path: '/article/edit/:id',
-      component: AddArticle,
+      path: '/article-edit/:id',
+      name: 'article-edit',
+      component: ArticleForm,
+      beforeEnter: requireAuth,
       props: true
     },
     {
-      path: '/add-article',
-      component: AddArticle,
+      path: '/article-add',
+      name: 'article-add',
+      component: ArticleForm,
       beforeEnter: requireAuth
     },
     {
       path: '/tags',
-      component: TagsPage
+      name: 'tags',
+      component: Tags
     },
     {
       path: '/login',
-      component: LoginPage
+      name: 'login',
+      component: Login
     },
     { path: '/logout',
+      name: 'logout',
       beforeEnter (to, from, next) {
         auth.logout()
         next('/')
@@ -64,7 +73,8 @@ export default new Router({
     },
     {
       path: '/404',
-      component: PageNotFound
+      name: '404',
+      component: NotFound
     },
     {
       path: '*',

@@ -35,8 +35,8 @@
                 <div class="invalid-feedback">{{ errors.tags }}</div>
             </div>
             <button type="button" class="btn btn-primary" @click="save" ref="submit">Speichern</button>
-            <button v-if="id>0" type="button" class="btn btn-link" @click="cancel" ref="cancel">Abbrechen</button>
-            <button v-if="id==0" type="button" class="btn btn-link" @click="reset" ref="reset">Zurücksetzen</button>
+            <button v-show="id>0" type="button" class="btn btn-link" @click="cancel" ref="cancel">Abbrechen</button>
+            <button v-show="id==0" type="button" class="btn btn-link" @click="reset" ref="reset">Zurücksetzen</button>
         </div>
 
         <!-- Modal -->
@@ -159,6 +159,9 @@
       }
     },
     created () {
+      if (this.id === undefined) {
+        return
+      }
       this.loading = true
       getArticle(this.id)
         .then(article => {

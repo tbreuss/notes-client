@@ -10,7 +10,7 @@
                         <router-link class="nav-link" to="/tags">Tags</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/add-article">Neu</router-link>
+                        <router-link class="nav-link" to="/article-add">Neu</router-link>
                     </li>
                     <li class="nav-item">
                         <router-link v-if="loggedIn" to="/logout" class="nav-link">Logout</router-link>

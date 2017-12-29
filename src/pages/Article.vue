@@ -12,12 +12,18 @@
             <div class="tags">
                 <article-tags :tags="article.tags"></article-tags>
             </div>
+            <div v-if="loggedIn" class="text-left">
+                <router-link :to="{ name: 'article-edit', params: { id: article.id }}" class="btn btn-primary">
+                    Artikel bearbeiten
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
   import { getArticle } from '../utils/api'
+  import auth from '../utils/auth'
 
   export default {
     props: ['id'],
@@ -37,6 +43,11 @@
         .catch(e => {
           console.error(e)
         })
+    },
+    computed: {
+      loggedIn () {
+        return auth.loggedIn()
+      }
     },
     methods: {
       markdown: function (value) {
