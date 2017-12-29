@@ -1,8 +1,13 @@
 import axios from 'axios'
 
-var instance = axios.create({
-  //baseURL: 'http://testing.tebe.ch/wissen-api/public/api.php/',
-  baseURL: 'http://localhost:9999/api.php/'
+let baseUrl = 'http://testing.tebe.ch/wissen-api/public/api.php/'
+
+if (process.env.NODE_ENV == 'development') {
+  baseUrl = 'http://localhost:9999/api.php/'
+}
+
+let instance = axios.create({
+  baseURL: baseUrl
 })
 
 instance.interceptors.request.use(config => {
