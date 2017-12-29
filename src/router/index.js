@@ -39,6 +39,11 @@ export default new Router({
       props: true
     },
     {
+      path: '/article/edit/:id',
+      component: AddArticle,
+      props: true
+    },
+    {
       path: '/add-article',
       component: AddArticle,
       beforeEnter: requireAuth

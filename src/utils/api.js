@@ -40,6 +40,18 @@ function postArticle (params) {
     .then(response => response.data)
 }
 
+function putArticle (id, params) {
+  var url = 'articles/' + id
+  var config = {
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    }
+  }
+  return http
+    .put(url, params, config)
+    .then(response => response.data)
+}
+
 function getTags (params) {
   var url = 'tags'
   return http.get(url, {params: params}).then(response => response.data)
@@ -55,6 +67,7 @@ export {
   getArticles,
   getSelectedArticles,
   postArticle,
+  putArticle,
   getTags,
   getSelectedTags
 }
