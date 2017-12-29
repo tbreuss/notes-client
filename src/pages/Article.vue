@@ -16,13 +16,19 @@
                 <router-link :to="{ name: 'article-edit', params: { id: article.id }}" class="btn btn-primary">
                     Artikel bearbeiten
                 </router-link>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog">
+                    Artikel löschen
+                </button>
             </div>
         </div>
+        <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
+            <p slot="body">Soll der Artikel gelöscht werden?</p>
+        </modal-dialog>
     </div>
 </template>
 
 <script>
-  import { getArticle } from '../utils/api'
+  import { getArticle, deleteArticle } from '../utils/api'
   import auth from '../utils/auth'
 
   export default {
@@ -30,7 +36,7 @@
     data () {
       return {
         loading: false,
-        article: {},
+        article: {}
       }
     },
     created: function () {
@@ -50,10 +56,14 @@
       }
     },
     methods: {
-      markdown: function (value) {
-        //return value;
-        if (!value) return ''
-        return markdown.toHTML(value)
+      deleteArticle() {
+        deleteArticle(this.id)
+          .then(() => {
+            this.$router.push('/articles')
+          })
+          .catch(error => {
+            console.error(error.response.data)
+          })
       }
     }
   }

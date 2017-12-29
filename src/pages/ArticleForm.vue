@@ -35,9 +35,14 @@
                 <div class="invalid-feedback">{{ errors.tags }}</div>
             </div>
             <button type="button" class="btn btn-primary" @click="save" ref="submit">Speichern</button>
+            <button v-show="id>0" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog" ref="delete">Löschen</button>
             <button v-show="id>0" type="button" class="btn btn-link" @click="cancel" ref="cancel">Abbrechen</button>
             <button v-show="id==0" type="button" class="btn btn-link" @click="reset" ref="reset">Zurücksetzen</button>
         </div>
+
+        <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
+            <p slot="body">Soll der Artikel gelöscht werden?</p>
+        </modal-dialog>
 
         <!-- Modal -->
         <div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel"
@@ -64,7 +69,7 @@
 </template>
 
 <script>
-  import { getArticle, postArticle, putArticle } from '../utils/api'
+  import { getArticle, postArticle, putArticle, deleteArticle } from '../utils/api'
 
   export default {
     props: ['id'],
@@ -85,6 +90,15 @@
     methods: {
       cancel() {
         this.$router.push('/article/' + this.id)
+      },
+      deleteArticle() {
+        deleteArticle(this.id)
+          .then(() => {
+            this.$router.push('/articles')
+          })
+          .catch(error => {
+            console.error(error.response.data)
+          })
       },
       reset: function () {
         this.formSent = false

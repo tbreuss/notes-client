@@ -52,6 +52,18 @@ function putArticle (id, params) {
     .then(response => response.data)
 }
 
+function deleteArticle (id) {
+  var url = 'articles/' + id
+  var config = {
+    headers: {
+      'Content-type': 'application/x-www-form-urlencoded'
+    }
+  }
+  return http
+    .delete(url)
+    .then(response => response.data)
+}
+
 function getTags (params) {
   var url = 'tags'
   return http.get(url, {params: params}).then(response => response.data)
@@ -68,6 +80,7 @@ export {
   getSelectedArticles,
   postArticle,
   putArticle,
+  deleteArticle,
   getTags,
   getSelectedTags
 }

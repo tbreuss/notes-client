@@ -5,6 +5,7 @@ import router from '@/router'
 import App from '@/App'
 import ArticlesComponent from '@/components/ArticlesComponent'
 import ArticleTags from '@/components/ArticleTags'
+import ModalDialog from '@/components/ModalDialog'
 import VueMarkdown from 'vue-markdown' // production
 
 Storage.prototype.setObj = function (key, obj) {
@@ -37,6 +38,7 @@ Vue.filter('date', function (value) {
 Vue.component('articles', ArticlesComponent)
 Vue.component('article-tags', ArticleTags)
 Vue.component('vue-markdown', VueMarkdown)
+Vue.component('modal-dialog', ModalDialog)
 
 /* eslint-disable no-new */
 new Vue({
