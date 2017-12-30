@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let baseUrl = 'http://testing.tebe.ch/wissen-api/public/api.php/'
+let baseUrl = 'https://kdb-api.tebe.ch/public/api.php/'
 
 if (process.env.NODE_ENV == 'development') {
   baseUrl = 'http://localhost:9999/api.php/'
