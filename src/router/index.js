@@ -11,6 +11,9 @@ import Login from '@/pages/Login'
 import NotFound from '@/pages/NotFound'
 import Start from '@/pages/Start'
 import Tags from '@/pages/Tags'
+import Users from '@/pages/Users'
+import User from '@/pages/User'
+import Error from '@/pages/Error'
 
 function requireAuth (to, from, next) {
   if (!auth.loggedIn()) {
@@ -36,28 +39,38 @@ export default new Router({
       component: Articles
     },
     {
-      path: '/article/:id',
-      name: 'article',
-      component: Article,
-      props: true
-    },
-    {
-      path: '/article-edit/:id',
+      path: '/articles/:id/update',
       name: 'article-edit',
       component: ArticleForm,
       beforeEnter: requireAuth,
       props: true
     },
     {
-      path: '/article-add',
+      path: '/articles/add',
       name: 'article-add',
       component: ArticleForm,
       beforeEnter: requireAuth
     },
     {
+      path: '/articles/:id',
+      name: 'article',
+      component: Article,
+      props: true
+    },
+    {
       path: '/tags',
       name: 'tags',
       component: Tags
+    },
+    {
+      path: '/users/:id',
+      name: 'user',
+      component: User
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: Users
     },
     {
       path: '/login',
@@ -72,9 +85,16 @@ export default new Router({
       }
     },
     {
+      path: '/error',
+      name: 'error',
+      component: Error,
+      props: true
+    },
+    {
       path: '/404',
       name: '404',
-      component: NotFound
+      component: NotFound,
+      props: true
     },
     {
       path: '*',

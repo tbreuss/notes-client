@@ -6,13 +6,10 @@
 
 <script>
   export default {
-
     props: ['tags'],
     methods: {}
   }
-
 </script>
 
 <style scoped>
-
 </style>

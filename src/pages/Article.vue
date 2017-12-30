@@ -1,25 +1,22 @@
 <template>
-    <div>
-        <div class="loading" v-if="loading">
-            Lade...
+    <div class="loading" v-if="loading">
+        Lade...
+    </div>
+    <div v-else>
+        <h1>{{ article.title }}</h1>
+        <div class="content">
+            <vue-markdown :source="article.content"></vue-markdown>
         </div>
-        <div v-else>
-            <h1>{{ article.title }}</h1>
-            <p>{{ article.abstract }}</p>
-            <div class="content">
-                <vue-markdown :source="article.content"></vue-markdown>
-            </div>
-            <div class="tags">
-                <article-tags :tags="article.tags"></article-tags>
-            </div>
-            <div v-if="loggedIn" class="text-left">
-                <router-link :to="{ name: 'article-edit', params: { id: article.id }}" class="btn btn-primary">
-                    Artikel bearbeiten
-                </router-link>
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog">
-                    Artikel löschen
-                </button>
-            </div>
+        <div class="tags">
+            <article-tags :tags="article.tags"></article-tags>
+        </div>
+        <div v-if="loggedIn" class="actions text-left">
+            <router-link :to="'/articles/' + article.id + '/update'" class="btn btn-primary">
+                Artikel bearbeiten
+            </router-link>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog">
+                Artikel löschen
+            </button>
         </div>
         <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
             <p slot="body">Soll der Artikel gelöscht werden?</p>
@@ -67,7 +64,6 @@
       }
     }
   }
-
 </script>
 
 <style scoped>

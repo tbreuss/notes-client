@@ -9,9 +9,6 @@
 <script>
   export default {
     name: 'StartPage',
-    data () {
-      return {}
-    }
   }
 </script>
 

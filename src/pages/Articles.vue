@@ -14,7 +14,7 @@
                         ...lade Daten
                 </span>
                 <div class="list-group">
-                    <router-link v-for="article in articles" :to="'/article/' + article.id"
+                    <router-link v-for="article in articles" :to="'/articles/' + article.id"
                                  class="list-group-item list-group-item-action" :key="article.id">
                         {{ article.title }}<br>
                         <article-tags :tags="article.tags"></article-tags>
@@ -114,9 +114,6 @@
             sessionStorage.setItem('ArticlesPage.q', this.q)
             sessionStorage.setItem('ArticlesPage.sort', this.sort)
             this.loadTags()
-          })
-          .catch(e => {
-            console.error(e)
           })
       },
       loadPrevPage: function (event) {

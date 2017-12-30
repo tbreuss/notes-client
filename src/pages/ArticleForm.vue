@@ -89,7 +89,7 @@
     computed: {},
     methods: {
       cancel() {
-        this.$router.push('/article/' + this.id)
+        this.$router.push('/articles/' + this.id)
       },
       deleteArticle() {
         deleteArticle(this.id)
@@ -138,7 +138,7 @@
           .then(() => {
             this.$refs.reset.disabled = false
             this.$refs.submit.disabled = false
-            this.$router.push('/article/' + this.id)
+            this.$router.push('/articles/' + this.id)
           })
           .catch(error => {
             this.errors = error.response.data

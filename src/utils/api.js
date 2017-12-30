@@ -74,6 +74,11 @@ function getSelectedTags (params) {
   return http.get(url, {params: params}).then(response => response.data)
 }
 
+function getUsers (params) {
+  var url = 'users'
+  return http.get(url, {params: params}).then(response => response.data)
+}
+
 export {
   getArticle,
   getArticles,
@@ -82,5 +87,6 @@ export {
   putArticle,
   deleteArticle,
   getTags,
-  getSelectedTags
+  getSelectedTags,
+  getUsers
 }
