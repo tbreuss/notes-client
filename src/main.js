@@ -30,9 +30,11 @@ Vue.filter('markdown', function (value) {
   return markdown.toHTML(value)
 })
 
-Vue.filter('date', function (value) {
-  var d = new Date(value)
-  return d.toLocaleDateString()
+Vue.filter('date', function (strDate) {
+  //  Safari & IE browsers do not support the date format “yyyy-mm-dd”
+  strDate = strDate.replace(/-/g, '/')
+  var date = new Date(strDate)
+  return date.toLocaleDateString()
 })
 
 Vue.component('articles', ArticlesComponent)
