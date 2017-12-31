@@ -6,7 +6,7 @@
         <h1>{{ article.title }}</h1>
 
         <div class="content">
-            <vue-markdown @rendered="markdownRendered">{{ article.content }}</vue-markdown>
+            <vue-markdown :postrender="markdownPostRender" @rendered="markdownRendered">{{ article.content }}</vue-markdown>
         </div>
         <div class="tags">
             <article-tags :tags="article.tags"></article-tags>
@@ -51,6 +51,13 @@
     computed: {
       loggedIn () {
         return auth.loggedIn()
+      },
+      baseUrl() {
+        let baseUrl = 'https://kdb-api.tebe.ch/public/media/'
+        if (process.env.NODE_ENV == 'development') {
+          baseUrl = 'http://localhost:9999/media/'
+        }
+        return baseUrl
       }
     },
     methods: {
@@ -62,6 +69,10 @@
           .catch(error => {
             console.error(error.response.data)
           })
+      },
+      markdownPostRender(value) {
+        value = value.replace(new RegExp('src="/media/', 'g'), 'class="img-fluid" src="' + this.baseUrl);
+        return value
       },
       markdownRendered() {
         Prism.highlightAll()

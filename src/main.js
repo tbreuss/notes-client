@@ -6,6 +6,7 @@ import App from '@/App'
 import ArticlesComponent from '@/components/ArticlesComponent'
 import ArticleTags from '@/components/ArticleTags'
 import ModalDialog from '@/components/ModalDialog'
+import TextareaUpload from '@/components/TextareaUpload'
 import VueMarkdown from 'vue-markdown' // production
 
 Storage.prototype.setObj = function (key, obj) {
@@ -41,6 +42,7 @@ Vue.component('articles', ArticlesComponent)
 Vue.component('article-tags', ArticleTags)
 Vue.component('vue-markdown', VueMarkdown)
 Vue.component('modal-dialog', ModalDialog)
+Vue.component('textarea-upload', TextareaUpload)
 
 /* eslint-disable no-new */
 new Vue({

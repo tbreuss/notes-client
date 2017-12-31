@@ -18,8 +18,9 @@
             </div>
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea v-model="article.content" :class="getClass('content')" id="content" rows="10"
-                          cols="10"></textarea>
+                <textarea-upload :url="'/upload'" v-model="article.content" :class="getClass('content')" id="content" rows="10"
+                                 cols="10"></textarea-upload>
+
                 <small class="float-right">
                     <button type="button" class="btn btn-sm btn-link" data-toggle="modal" data-target="#previewModal">
                         Vorschau
