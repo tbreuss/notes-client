@@ -57,7 +57,7 @@
                     </div>
                     <div class="modal-body">
                         <div v-if="article.content.trim()==''">Kein Content erfasst</div>
-                        <vue-markdown v-else :source="article.content"></vue-markdown>
+                        <vue-markdown v-else @rendered="markdownRendered">{{ article.content }}</vue-markdown>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Schliessen</button>
@@ -170,6 +170,9 @@
           content: article.content,
           tags: Array.isArray(article.tags) ? article.tags.join(',') : article.tags
         }
+      },
+      markdownRendered() {
+        Prism.highlightAll()
       }
     },
     created () {

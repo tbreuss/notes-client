@@ -4,8 +4,9 @@
     </div>
     <div v-else>
         <h1>{{ article.title }}</h1>
+
         <div class="content">
-            <vue-markdown :source="article.content"></vue-markdown>
+            <vue-markdown @rendered="markdownRendered">{{ article.content }}</vue-markdown>
         </div>
         <div class="tags">
             <article-tags :tags="article.tags"></article-tags>
@@ -36,7 +37,7 @@
         article: {}
       }
     },
-    created: function () {
+    mounted: function () {
       this.loading = true
       getArticle(this.id)
         .then(article => {
@@ -61,6 +62,9 @@
           .catch(error => {
             console.error(error.response.data)
           })
+      },
+      markdownRendered() {
+        Prism.highlightAll()
       }
     }
   }
