@@ -2,14 +2,14 @@
     <div v-cloak>
         <div class="row">
             <div class="col-lg-12">
-                <h4>Artikel</h4>
+                <h4>Einträge</h4>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8">
                 <span v-if="articles.length>0" else>Zeige {{ pagingFrom }} bis {{ pagingTo }} von {{ paging.totalItems
-                    }} Artikel</span>
-                <span v-if="!loading && articles.length==0">Keine Artikel gefunden</span>
+                    }} Einträgen</span>
+                <span v-if="!loading && articles.length==0">Keine Einträge gefunden</span>
                 <span class="loading" v-if="loading">
                         ...lade Daten
                 </span>

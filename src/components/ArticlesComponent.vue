@@ -1,6 +1,6 @@
 <template>
     <div>
-        <slot name="title"><h4>Artikel Componente</h4></slot>
+        <slot name="title"><h4>Einträge</h4></slot>
         <div class="loading" v-if="loading">
             Lade...
         </div>

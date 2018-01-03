@@ -13,14 +13,14 @@
         </div>
         <div v-if="loggedIn" class="actions text-left">
             <router-link :to="'/articles/' + article.id + '/update'" class="btn btn-primary">
-                Artikel bearbeiten
+                Eintrag bearbeiten
             </router-link>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog">
-                Artikel löschen
+                Eintrag löschen
             </button>
         </div>
         <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
-            <p slot="body">Soll der Artikel gelöscht werden?</p>
+            <p slot="body">Soll der Eintrag gelöscht werden?</p>
         </modal-dialog>
     </div>
 </template>

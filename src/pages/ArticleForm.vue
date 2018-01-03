@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h4 v-if="id>0">Artikel bearbeiten</h4>
-        <h4 v-else>Artikel hinzufügen</h4>
+        <h4 v-if="id>0">Eintrag bearbeiten</h4>
+        <h4 v-else>Eintrag hinzufügen</h4>
         <div class="loading" v-if="loading">
             Lade...
         </div>
@@ -42,7 +42,7 @@
         </div>
 
         <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
-            <p slot="body">Soll der Artikel gelöscht werden?</p>
+            <p slot="body">Soll der Eintrag gelöscht werden?</p>
         </modal-dialog>
 
         <!-- Modal -->

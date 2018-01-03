@@ -4,7 +4,7 @@
             <nav>
                 <ul class="nav nav-pills float-right">
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/articles">Artikel</router-link>
+                        <router-link class="nav-link" to="/articles">Einträge</router-link>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/tags">Tags</router-link>
@@ -19,7 +19,7 @@
                 </ul>
             </nav>
             <h3 class="text-muted">
-                <router-link to="/">Wissen</router-link>
+                <router-link to="/">Notes</router-link>
             </h3>
         </header>
         <main role="main">
