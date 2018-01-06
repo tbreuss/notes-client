@@ -1,11 +1,7 @@
 <template>
-    <layout-default v-cloak>
-        <div class="row">
-            <div class="col-lg-12">
-                <h4>Benutzer</h4>
-            </div>
-            {{ user }}
-        </div>
+    <layout-default>
+        <h4>Benutzer</h4>
+        {{ user }}
     </layout-default>
 </template>
 

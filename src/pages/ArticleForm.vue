@@ -22,7 +22,7 @@
                                  cols="10"></textarea-upload>
 
                 <small class="float-right">
-                    <button type="button" class="btn btn-sm btn-link" data-toggle="modal" data-target="#previewModal">
+                    <button @click.prevent="parseMarkdown" type="button" class="btn btn-sm btn-link" data-toggle="modal" data-target="#previewModal">
                         Vorschau
                     </button>
                 </small>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="modal-body">
                         <div v-if="article.content.trim()==''">Kein Content erfasst</div>
-                        <vue-markdown v-else @rendered="markdownRendered">{{ article.content }}</vue-markdown>
+                        <div class="markdown" v-html="parsed"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Schliessen</button>
@@ -71,6 +71,7 @@
 
 <script>
   import { getArticle, postArticle, putArticle, deleteArticle } from '../utils/api'
+  import markdown from '../utils/markdown'
 
   export default {
     props: ['id'],
@@ -83,6 +84,7 @@
           content: '',
           tags: ''
         },
+        parsed: '',
         errors: {},
         formSent: false
       }
@@ -172,8 +174,9 @@
           tags: Array.isArray(article.tags) ? article.tags.join(',') : article.tags
         }
       },
-      markdownRendered() {
-        Prism.highlightAll()
+      parseMarkdown() {
+        this.parsed = markdown.parse(this.article.content)
+        this.$nextTick().then(() => Prism.highlightAll())
       }
     },
     created () {

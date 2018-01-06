@@ -4,6 +4,11 @@ html {
 }
 
 body {
+    min-height: 100vh;
+}
+
+.layout-default {
+    min-height: 100vh;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -31,10 +36,12 @@ body {
 
 /* Custom page footer */
 .footer {
-    padding-top: 1.5rem;
-    color: #777;
-    border-top: .05rem solid #e5e5e5;
-    background-color: #f9f9f9;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: #4c5058;
+    background-color: #F6F7F9;
+    font-size:14px;
+    margin-top: 3rem;
 }
 
 /* Customize container */
@@ -122,4 +129,35 @@ body.login {
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+
+.navbar-nav .nav-item {
+
+}
+
+.navbar-nav .nav-link {
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    background-color: rgba(255,255,255,0.8);
+    color: #4c5058;
+    font-weight: bold;
+    margin-left: 1rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    border-radius: 2px;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link:hover {
+    background-color: #fff;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 0 1px #4c5058;
+}
+.navbar-brand:hover {
+    color: #fff;
 }

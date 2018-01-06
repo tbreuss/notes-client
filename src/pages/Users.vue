@@ -1,24 +1,16 @@
 <template>
     <layout-default v-cloak>
-        <div class="row">
-            <div class="col-lg-12">
-                <h4>Benutzer</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8">
-                <span v-if="tags.length>0">Zeige {{ tags.length }} Benutzer</span>
-                <span class="loading" v-if="loading">
-                    ...lade Daten
-                </span>
-                <ul class="list-group">
-                    <router-link v-for="tag in tags" :to="'/users/' + tag.id"
-                                 class="list-group-item list-group-item-action" :key="tag.id">
-                        {{ tag.name }}
-                    </router-link>
-                </ul>
-            </div>
-        </div>
+        <h4>Benutzer</h4>
+        <span v-if="tags.length>0">Zeige {{ tags.length }} Benutzer</span>
+        <span class="loading" v-if="loading">
+            ...lade Daten
+        </span>
+        <ul class="list-group">
+            <router-link v-for="tag in tags" :to="'/users/' + tag.id"
+                         class="list-group-item list-group-item-action" :key="tag.id">
+                {{ tag.name }}
+            </router-link>
+        </ul>
     </layout-default>
 </template>
 

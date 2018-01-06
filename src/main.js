@@ -7,7 +7,6 @@ import ArticlesComponent from '@/components/ArticlesComponent'
 import ArticleTags from '@/components/ArticleTags'
 import ModalDialog from '@/components/ModalDialog'
 import TextareaUpload from '@/components/TextareaUpload'
-import VueMarkdown from 'vue-markdown' // production
 import LayoutDefault from '@/layouts/default'
 import LayoutLogin from '@/layouts/login'
 
@@ -28,11 +27,6 @@ Vue.directive('focus', {
   }
 })
 
-Vue.filter('markdown', function (value) {
-  if (!value) return ''
-  return markdown.toHTML(value)
-})
-
 Vue.filter('date', function (strDate) {
   //  Safari & IE browsers do not support the date format “yyyy-mm-dd”
   strDate = strDate.replace(/-/g, '/')
@@ -42,7 +36,6 @@ Vue.filter('date', function (strDate) {
 
 Vue.component('articles', ArticlesComponent)
 Vue.component('article-tags', ArticleTags)
-Vue.component('vue-markdown', VueMarkdown)
 Vue.component('modal-dialog', ModalDialog)
 Vue.component('textarea-upload', TextareaUpload)
 Vue.component('layout-login', LayoutLogin)

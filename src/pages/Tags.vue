@@ -1,42 +1,32 @@
 <template>
-    <layout-default v-cloak>
-        <div class="row">
-            <div class="col-lg-12">
-                <h4>Tags</h4>
+    <layout-default>
+        <h4>Tags</h4>
+        <span v-if="tags.length>0">Zeige {{ tags.length }} Tags</span>
+        <span class="loading" v-if="loading">...lade Daten</span>
+        <ul class="list-group">
+            <a v-for="tag in tags" @click="toArticles(tag.name, $event)" href="#"
+               class="list-group-item d-flex justify-content-between align-items-center" :key="tag.id">
+                {{ tag.name}}
+                <span class="badge badge-secondary badge-pill">{{ tag.frequency }}</span>
+            </a>
+        </ul>
+        <div slot="aside">
+            Sortieren nach
+            <div class="form-check">
+                <input class="form-check-input" @change="loadData" id="tags-sort-radio-1" type="radio" value="name" v-model="sort">
+                <label class="form-check-label" for="tags-sort-radio-1">Tagname</label>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8">
-                <span v-if="tags.length>0">Zeige {{ tags.length }} Tags</span>
-                <span class="loading" v-if="loading">
-                    ...lade Daten
-                </span>
-                <ul class="list-group">
-                    <a v-for="tag in tags" @click="toArticles(tag.name, $event)" href="#"
-                       class="list-group-item d-flex justify-content-between align-items-center" :key="tag.id">
-                        {{ tag.name}}
-                        <span class="badge badge-secondary badge-pill">{{ tag.frequency }}</span>
-                    </a>
-                </ul>
+            <div class="form-check">
+                <input class="form-check-input" @change="loadData" id="tags-sort-radio-2" type="radio" value="frequency" v-model="sort">
+                <label class="form-check-label" for="tags-sort-radio-2">Häufigkeit</label>
             </div>
-            <div class="col-lg-4">
-                Sortieren nach
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-1" type="radio" value="name" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-1">Tagname</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-2" type="radio" value="frequency" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-2">Häufigkeit</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-3" type="radio" value="changed" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-3">Letzter Änderung</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-4" type="radio" value="created" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-4">Letzter Eintrag</label>
-                </div>
+            <div class="form-check">
+                <input class="form-check-input" @change="loadData" id="tags-sort-radio-3" type="radio" value="changed" v-model="sort">
+                <label class="form-check-label" for="tags-sort-radio-3">Letzter Änderung</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" @change="loadData" id="tags-sort-radio-4" type="radio" value="created" v-model="sort">
+                <label class="form-check-label" for="tags-sort-radio-4">Letzter Eintrag</label>
             </div>
         </div>
     </layout-default>
