@@ -1,12 +1,12 @@
 <template>
-    <div v-cloak>
+    <layout-default v-cloak>
         <div class="row">
             <div class="col-lg-12">
                 <h4>Benutzer</h4>
             </div>
             {{ user }}
         </div>
-    </div>
+    </layout-default>
 </template>
 
 <script>

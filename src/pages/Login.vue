@@ -1,24 +1,25 @@
 <template>
-    <div>
+    <layout-login>
         <div v-if="isAuthenticated">
             <h4>Angemeldet</h4>
             <button type="button" @click="logout">Logout</button>
         </div>
-        <div v-else>
-            <h4>Login</h4>
-            <div class="form-group">
-                <label for="username">Benutzername</label>
-                <input v-on:focus="reset()" v-on:keyup.enter="login" v-model="form.username" type="text" :class="getClass('username')" id="username" v-focus>
-                <div class="invalid-feedback">{{ errors.username }}</div>
-            </div>
-            <div class="form-group">
-                <label for="password">Passwort</label>
-                <input v-on:focus="reset()" v-on:keyup.enter="login" v-model="form.password" :class="getClass('password')" type="password" id="password">
-                <div class="invalid-feedback">{{ errors.password }}</div>
-            </div>
-            <button type="button" class="btn btn-primary" @click="login" ref="loginBtn">Login</button>
+        <div v-else class="form-signin">
+
+            <h2>Login</h2>
+
+            <label for="username" class="sr-only">Benutzername</label>
+            <input v-on:focus="reset()" v-on:keyup.enter="login" v-model="form.username" type="text" :class="getClass('username')" id="username" placeholder="Benutzername" v-focus>
+
+            <label for="password" class="sr-only">Passwort</label>
+            <input v-on:focus="reset()" v-on:keyup.enter="login" v-model="form.password" :class="getClass('password')" type="password" id="password" placeholder="Passwort">
+
+            <button type="button" class="btn btn-primary btn-block" @click="login" ref="loginBtn">Login</button>
+
+            <div style="margin-top:1em" class="alert alert-danger" role="alert" v-if="errors.username || errors.password">Benutzername/Passwort falsch</div>
+
         </div>
-    </div>
+    </layout-login>
 </template>
 
 <script>

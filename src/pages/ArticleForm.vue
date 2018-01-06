@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <layout-default>
         <h4 v-if="id>0">Eintrag bearbeiten</h4>
         <h4 v-else>Eintrag hinzufügen</h4>
         <div class="loading" v-if="loading">
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </layout-default>
 </template>
 
 <script>

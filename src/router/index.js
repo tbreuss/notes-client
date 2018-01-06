@@ -31,12 +31,14 @@ export default new Router({
     {
       path: '/',
       name: 'start',
-      component: Start
+      component: Start,
+      beforeEnter: requireAuth
     },
     {
       path: '/articles',
       name: 'articles',
-      component: Articles
+      component: Articles,
+      beforeEnter: requireAuth
     },
     {
       path: '/articles/:id/update',
@@ -55,22 +57,26 @@ export default new Router({
       path: '/articles/:id',
       name: 'article',
       component: Article,
-      props: true
+      props: true,
+      beforeEnter: requireAuth
     },
     {
       path: '/tags',
       name: 'tags',
-      component: Tags
+      component: Tags,
+      beforeEnter: requireAuth
     },
     {
       path: '/users/:id',
       name: 'user',
-      component: User
+      component: User,
+      beforeEnter: requireAuth
     },
     {
       path: '/users',
       name: 'users',
-      component: Users
+      component: Users,
+      beforeEnter: requireAuth
     },
     {
       path: '/login',
@@ -81,7 +87,7 @@ export default new Router({
       name: 'logout',
       beforeEnter (to, from, next) {
         auth.logout()
-        next('/')
+        next('/login')
       }
     },
     {

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <layout-default>
         <div v-if="error">
             <h1>Error {{ error.status }}</h1>
             <p>{{ error.statusText }}</p>
@@ -9,7 +9,7 @@
         <div v-else>
             <h1>Error</h1>
         </div>
-    </div>
+    </layout-default>
 </template>
 
 <script>

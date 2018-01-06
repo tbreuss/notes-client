@@ -8,6 +8,8 @@ import ArticleTags from '@/components/ArticleTags'
 import ModalDialog from '@/components/ModalDialog'
 import TextareaUpload from '@/components/TextareaUpload'
 import VueMarkdown from 'vue-markdown' // production
+import LayoutDefault from '@/layouts/default'
+import LayoutLogin from '@/layouts/login'
 
 Storage.prototype.setObj = function (key, obj) {
   return this.setItem(key, JSON.stringify(obj))
@@ -43,6 +45,8 @@ Vue.component('article-tags', ArticleTags)
 Vue.component('vue-markdown', VueMarkdown)
 Vue.component('modal-dialog', ModalDialog)
 Vue.component('textarea-upload', TextareaUpload)
+Vue.component('layout-login', LayoutLogin)
+Vue.component('layout-default', LayoutDefault)
 
 /* eslint-disable no-new */
 new Vue({

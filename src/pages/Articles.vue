@@ -1,5 +1,5 @@
 <template>
-    <div v-cloak>
+    <layout-default v-cloak>
         <div class="row">
             <div class="col-lg-12">
                 <h4>Einträge</h4>
@@ -59,11 +59,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </layout-default>
 </template>
 
 <script>
-
   import { getArticles, getSelectedTags } from '../utils/api'
 
   export default {

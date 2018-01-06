@@ -1,28 +1,30 @@
 <template>
-    <div class="loading" v-if="loading">
-        Lade...
-    </div>
-    <div v-else>
-        <h1>{{ article.title }}</h1>
+    <layout-default>
+        <div class="loading" v-if="loading">
+            Lade...
+        </div>
+        <div v-else>
+            <h1>{{ article.title }}</h1>
 
-        <div class="content">
-            <vue-markdown :postrender="markdownPostRender" @rendered="markdownRendered">{{ article.content }}</vue-markdown>
+            <div class="content">
+                <vue-markdown :postrender="markdownPostRender" @rendered="markdownRendered">{{ article.content }}</vue-markdown>
+            </div>
+            <div class="tags">
+                <article-tags :tags="article.tags"></article-tags>
+            </div>
+            <div v-if="loggedIn" class="actions text-left">
+                <router-link :to="'/articles/' + article.id + '/update'" class="btn btn-primary">
+                    Eintrag bearbeiten
+                </router-link>
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog">
+                    Eintrag löschen
+                </button>
+            </div>
+            <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
+                <p slot="body">Soll der Eintrag gelöscht werden?</p>
+            </modal-dialog>
         </div>
-        <div class="tags">
-            <article-tags :tags="article.tags"></article-tags>
-        </div>
-        <div v-if="loggedIn" class="actions text-left">
-            <router-link :to="'/articles/' + article.id + '/update'" class="btn btn-primary">
-                Eintrag bearbeiten
-            </router-link>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog">
-                Eintrag löschen
-            </button>
-        </div>
-        <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
-            <p slot="body">Soll der Eintrag gelöscht werden?</p>
-        </modal-dialog>
-    </div>
+    </layout-default>
 </template>
 
 <script>

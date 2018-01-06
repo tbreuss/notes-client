@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <layout-default>
         <h1>Page not found</h1>
-    </div>
+    </layout-default>
 </template>
 
 <script>

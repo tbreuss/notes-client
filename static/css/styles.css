@@ -4,8 +4,6 @@ html {
 }
 
 body {
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -18,8 +16,10 @@ body {
 
 /* Custom page header */
 .header {
-    padding-bottom: 1rem;
-    border-bottom: .05rem solid #e5e5e5;
+    background-color: #f5f5f6;
+    height: 165px;
+    margin-bottom: 30px;
+    background-image: url(https://www.team.jobs/Img/header_enterprises.jpg)
 }
 
 /* Make the masthead heading the same height as the navigation */
@@ -34,12 +34,12 @@ body {
     padding-top: 1.5rem;
     color: #777;
     border-top: .05rem solid #e5e5e5;
+    background-color: #f9f9f9;
 }
 
 /* Customize container */
 @media (min-width: 48em) {
     .container {
-        max-width: 46rem;
     }
 }
 .container-narrow > hr {
@@ -83,4 +83,43 @@ body {
     .jumbotron {
         border-bottom: 0;
     }
+}
+
+
+/* Login */
+body.login {
+    background-color: #eee;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 80px 15px 15px 15px;
+    margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+.form-signin .checkbox {
+    font-weight: 400;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
