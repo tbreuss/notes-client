@@ -1,14 +1,21 @@
 <template>
     <layout-default>
 
-        <h4>Einträge</h4>
+        <div class="articles__search">
+            <input @change="loadData(true)" type="text" v-model="q" class="form-control form-control-lg articles__searchfield" placeholder="Einträge suchen..." v-focus>
+        </div>
 
-        <span v-if="articles.length>0" else>Zeige {{ pagingFrom }} bis {{ pagingTo }} von {{ paging.totalItems
-            }} Einträgen</span>
-        <span v-if="!loading && articles.length==0">Keine Einträge gefunden</span>
-        <span class="loading" v-if="loading">
+        <div class="paging-text">
+            <span v-show="articles.length>0">
+                Zeige {{ pagingFrom }} bis {{ pagingTo }} von {{ paging.totalItems }} Einträgen
+            </span>
+            <span class="paging-text__loading" v-show="loading">
                 ...lade Daten
-        </span>
+            </span>
+        </div>
+
+        <div v-if="!loading && articles.length==0">Keine Einträge gefunden</div>
+
         <div class="list-group">
             <router-link v-for="article in articles" :to="'/articles/' + article.id"
                          class="list-group-item list-group-item-action" :key="article.id">
@@ -26,31 +33,31 @@
         </div>
 
         <div slot="aside">
-            Filtern nach<br>
-            <input @change="loadData(true)" type="text" v-model="q" class="form-control">
-
-            Sortieren nach<br>
-            <div class="form-check">
-                <input class="form-check-input" id="articles-sort-radio-1" @change="loadData" type="radio" value="title" v-model="sort">
-                <label class="form-check-label" for="articles-sort-radio-1">Titel</label>
+            <div class="aside-sort">
+                <h4 class="aside-sort__title">Sortieren nach</h4>
+                <div class="form-check">
+                    <input class="form-check-input" id="articles-sort-radio-1" @change="loadData" type="radio" value="title" v-model="sort">
+                    <label class="form-check-label" for="articles-sort-radio-1">Titel</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="articles-sort-radio-2" @change="loadData" type="radio" value="popular" v-model="sort">
+                    <label class="form-check-label" for="articles-sort-radio-2">Beliebtheit</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="articles-sort-radio-3" @change="loadData" type="radio" value="changed" v-model="sort">
+                    <label class="form-check-label" for="articles-sort-radio-3">Letzter Änderung</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" id="articles-sort-radio-4" @change="loadData" type="radio" value="created" v-model="sort">
+                    <label class="form-check-label" for="articles-sort-radio-4">Letzter Eintrag</label>
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" id="articles-sort-radio-2" @change="loadData" type="radio" value="popular" v-model="sort">
-                <label class="form-check-label" for="articles-sort-radio-2">Beliebtheit</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" id="articles-sort-radio-3" @change="loadData" type="radio" value="changed" v-model="sort">
-                <label class="form-check-label" for="articles-sort-radio-3">Letzter Änderung</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" id="articles-sort-radio-4" @change="loadData" type="radio" value="created" v-model="sort">
-                <label class="form-check-label" for="articles-sort-radio-4">Letzter Eintrag</label>
-            </div>
-
-            Tags<br>
-            <div v-for="(tag, index) in tags" class="form-check">
-                <input class="form-check-input" :id="'articles-tags-radio-' + index" @change="loadData" type="checkbox" :value="tag" v-model="selectedTags">
-                <label class="form-check-label" :for="'articles-tags-radio-' + index">{{ tag }}</label>
+            <div class="aside-tags" v-if="tags.length > 0">
+                <h4 class="aside-tags__title">Tags</h4>
+                <div v-for="(tag, index) in tags" class="form-check">
+                    <input class="form-check-input" :id="'aside-tags__check--' + index" @change="loadData" type="checkbox" :value="tag" v-model="selectedTags">
+                    <label class="form-check-label" :for="'aside-tags__check--' + index">{{ tag }}</label>
+                </div>
             </div>
         </div>
     </layout-default>

@@ -1,12 +1,48 @@
 <template>
     <layout-default>
+
         <div class="loading" v-if="loading">Lade...</div>
+
         <h1>{{ article.title }}</h1>
+
         <div class="content" v-html="parsed"></div>
-        <div class="tags">
-            <article-tags :tags="article.tags"></article-tags>
+
+        <div class="article__tags">
+
         </div>
-        <div v-if="loggedIn" class="actions text-left">
+
+        <table class="table table-sm">
+            <tr>
+                <td width="30%">Tags</td>
+                <td><article-tags :tags="article.tags"></article-tags></td>
+            </tr>
+            <tr>
+                <td>Views</td>
+                <td>{{ article.views }}</td>
+            </tr>
+            <tr>
+                <td>Likes</td>
+                <td>{{ article.likes }}</td>
+            </tr>
+            <tr>
+                <td>Erstellt am</td>
+                <td>{{ article.created }}</td>
+            </tr>
+            <tr>
+                <td>Erstellt von</td>
+                <td>{{ article.created_by }}</td>
+            </tr>
+            <tr>
+                <td>Geändert am</td>
+                <td>{{ article.modified }}</td>
+            </tr>
+            <tr>
+                <td>Geändert von</td>
+                <td>{{ article.modified_by }}</td>
+            </tr>
+        </table>
+
+        <div v-if="loggedIn" class="actions">
             <router-link :to="'/articles/' + article.id + '/update'" class="btn btn-primary">
                 Eintrag bearbeiten
             </router-link>
@@ -14,9 +50,11 @@
                 Eintrag löschen
             </button>
         </div>
+
         <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
             <p slot="body">Soll der Eintrag gelöscht werden?</p>
         </modal-dialog>
+
     </layout-default>
 </template>
 
