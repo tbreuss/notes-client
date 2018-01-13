@@ -22,8 +22,40 @@ export default {
   },
 
   getToken () {
-    alert('token')
     return localStorage.token
+  },
+
+  getPayload () {
+    let token = this.getToken()
+    let base64Url = token.split('.')[1]
+    let base64 = base64Url.replace('-', '+').replace('_', '/')
+    return JSON.parse(window.atob(base64))
+  },
+
+  hasPermission (scope)
+  {
+    let payload = this.getPayload()
+    if (payload.user.role == 'admin') {
+      return true
+    }
+    if (payload.user.scopes.indexOf(scope) != -1) {
+      return true
+    }
+    return false
+  },
+
+  hasPermissionForUser(scope, userId)
+  {
+    let payload = this.getPayload()
+    if (payload.user.role == 'admin') {
+      return true
+    }
+    if (payload.user.scopes.indexOf(scope) != -1) {
+      if (payload.user.id == userId) {
+        return true
+      }
+    }
+    return false
   },
 
   logout (cb) {

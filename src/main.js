@@ -27,6 +27,12 @@ Vue.directive('focus', {
   }
 })
 
+Vue.directive('permission', {
+  bind: function (el, binding) {
+    console.log(binding.value) // => "white"
+  }
+})
+
 Vue.filter('date', function (strDate) {
   //  Safari & IE browsers do not support the date format “yyyy-mm-dd”
   strDate = strDate.replace(/-/g, '/')

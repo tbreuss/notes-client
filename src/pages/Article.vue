@@ -1,59 +1,64 @@
 <template>
     <layout-default>
 
-        <div class="loading" v-if="loading">Lade...</div>
+        <div v-if="loading" class="loading">
+            Lade...
+        </div>
+        <div v-else>
 
-        <h1>{{ article.title }}</h1>
+            <h1 class="article__title">{{ article.title }}</h1>
 
-        <div class="content" v-html="parsed"></div>
+            <div class="article__content" v-html="parsed"></div>
 
-        <div class="article__tags">
+            <div class="article__infos">
+                <h2>Artikel-Infos</h2>
+                <table class="table table-sm">
+                    <tr>
+                        <td width="30%">Tags</td>
+                        <td><article-tags :tags="article.tags"></article-tags></td>
+                    </tr>
+                    <tr>
+                        <td>Views</td>
+                        <td>{{ article.views }}</td>
+                    </tr>
+                    <tr>
+                        <td>Likes</td>
+                        <td>{{ article.likes }}</td>
+                    </tr>
+                    <tr>
+                        <td>Erstellt am</td>
+                        <td>{{ article.created }}</td>
+                    </tr>
+                    <tr>
+                        <td>Erstellt von</td>
+                        <td>{{ article.created_by }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geändert am</td>
+                        <td>{{ article.modified ? article.modified : '&ndash;' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Geändert von</td>
+                        <td>{{ article.modified_by ? article.modified_by : '&ndash;' }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="actions">
+                <router-link v-if="hasPermission('article.edit', article.created_by)" :to="'/articles/' + article.id + '/update'" class="btn btn-primary actions__button">
+                    Eintrag bearbeiten
+                </router-link>
+                <button v-if="hasPermission('article.delete', article.created_by)" type="button" class="btn btn-danger actions__button" data-toggle="modal" data-target="#deleteDialog">
+                    Eintrag löschen
+                </button>
+                <router-link class="btn btn-secondary actions__button" to="/articles">Zur Übersicht</router-link>
+            </div>
+
+            <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
+                <p slot="body">Soll der Eintrag gelöscht werden?</p>
+            </modal-dialog>
 
         </div>
-
-        <table class="table table-sm">
-            <tr>
-                <td width="30%">Tags</td>
-                <td><article-tags :tags="article.tags"></article-tags></td>
-            </tr>
-            <tr>
-                <td>Views</td>
-                <td>{{ article.views }}</td>
-            </tr>
-            <tr>
-                <td>Likes</td>
-                <td>{{ article.likes }}</td>
-            </tr>
-            <tr>
-                <td>Erstellt am</td>
-                <td>{{ article.created }}</td>
-            </tr>
-            <tr>
-                <td>Erstellt von</td>
-                <td>{{ article.created_by }}</td>
-            </tr>
-            <tr>
-                <td>Geändert am</td>
-                <td>{{ article.modified }}</td>
-            </tr>
-            <tr>
-                <td>Geändert von</td>
-                <td>{{ article.modified_by }}</td>
-            </tr>
-        </table>
-
-        <div v-if="loggedIn" class="actions">
-            <router-link :to="'/articles/' + article.id + '/update'" class="btn btn-primary">
-                Eintrag bearbeiten
-            </router-link>
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog">
-                Eintrag löschen
-            </button>
-        </div>
-
-        <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
-            <p slot="body">Soll der Eintrag gelöscht werden?</p>
-        </modal-dialog>
 
     </layout-default>
 </template>
@@ -85,11 +90,6 @@
           console.error(e)
         })
     },
-    computed: {
-      loggedIn () {
-        return auth.loggedIn()
-      }
-    },
     methods: {
       deleteArticle() {
         deleteArticle(this.id)
@@ -99,6 +99,9 @@
           .catch(error => {
             console.error(error.response.data)
           })
+      },
+      hasPermission(scope, userId) {
+        return auth.hasPermissionForUser(scope, userId)
       }
     }
   }

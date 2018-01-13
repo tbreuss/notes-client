@@ -2,7 +2,7 @@
     <layout-default>
         <h4 v-if="id>0">Eintrag bearbeiten</h4>
         <h4 v-else>Eintrag hinzufügen</h4>
-        <div class="loading" v-if="loading">
+        <div v-if="loading" class="loading">
             Lade...
         </div>
         <div v-else>
@@ -22,7 +22,7 @@
                                  cols="10"></textarea-upload>
 
                 <small class="float-right">
-                    <button @click.prevent="parseMarkdown" type="button" class="btn btn-sm btn-link" data-toggle="modal" data-target="#previewModal">
+                    <button @click.prevent="parseMarkdown" type="button" class="btn btn-sm" data-toggle="modal" data-target="#previewModal">
                         Vorschau
                     </button>
                 </small>
@@ -35,10 +35,16 @@
                 <small id="tagsHelp" class="form-text text-muted">Mehrere Tags kommagetrennt</small>
                 <div class="invalid-feedback">{{ errors.tags }}</div>
             </div>
-            <button type="button" class="btn btn-primary" @click="save" ref="submit">Speichern</button>
-            <button v-show="id>0" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteDialog" ref="delete">Löschen</button>
-            <button v-show="id>0" type="button" class="btn btn-link" @click="cancel" ref="cancel">Abbrechen</button>
-            <button v-show="id==0" type="button" class="btn btn-link" @click="reset" ref="reset">Zurücksetzen</button>
+            <div v-if="id>0" class="actions">
+                <button v-if="hasPermissionForUser('article.edit', article.created_by)" type="button" class="btn btn-primary actions__button" @click="save" ref="submit">Eintrag speichern</button>
+                <button v-if="hasPermissionForUser('article.delete', article.created_by)" type="button" class="btn btn-danger actions__button" data-toggle="modal" data-target="#deleteDialog" ref="delete">Eintrag löschen</button>
+                <button type="button" class="btn btn-secondary actions__button" @click="cancel" ref="cancel">Abbrechen</button>
+            </div>
+            <div v-if="!id" class="actions">
+                <button v-if="hasPermissionForUser('article.add')" type="button" class="btn btn-primary actions__button" @click="save" ref="submit">Eintrag speichern</button>
+                <button v-if="hasPermissionForUser('article.add')" type="button" class="btn btn-secondary actions__button" @click="reset">Zurücksetzen</button>
+                <button type="button" class="btn btn-secondary actions__button" @click="cancel" ref="cancel">Abbrechen</button>
+            </div>
         </div>
 
         <modal-dialog :id="'deleteDialog'" @confirm="deleteArticle">
@@ -70,8 +76,9 @@
 </template>
 
 <script>
-  import { getArticle, postArticle, putArticle, deleteArticle } from '../utils/api'
-  import markdown from '../utils/markdown'
+  import { getArticle, postArticle, putArticle, deleteArticle } from '@/utils/api'
+  import auth from '@/utils/auth'
+  import markdown from '@/utils/markdown'
 
   export default {
     props: ['id'],
@@ -92,7 +99,11 @@
     computed: {},
     methods: {
       cancel() {
-        this.$router.push('/articles/' + this.id)
+        if (this.id) {
+          this.$router.push('/articles/' + this.id)
+        } else {
+          this.$router.push('/articles')
+        }
       },
       deleteArticle() {
         deleteArticle(this.id)
@@ -113,7 +124,6 @@
         }
       },
       save() {
-        this.$refs.reset.disabled = true
         this.$refs.submit.disabled = true
         this.formSent = true
         let article = this.getArticle()
@@ -126,26 +136,22 @@
       insert: function (article) {
         postArticle(article)
           .then(() => {
-            this.$refs.reset.disabled = false
             this.$refs.submit.disabled = false
             this.$router.push('/articles')
           })
           .catch(error => {
             this.errors = error.response.data
-            this.$refs.reset.disabled = false
             this.$refs.submit.disabled = false
           })
       },
       update: function (article) {
         putArticle(this.id, article)
           .then(() => {
-            this.$refs.reset.disabled = false
             this.$refs.submit.disabled = false
             this.$router.push('/articles/' + this.id)
           })
           .catch(error => {
             this.errors = error.response.data
-            this.$refs.reset.disabled = false
             this.$refs.submit.disabled = false
           })
       },
@@ -171,12 +177,20 @@
           title: article.title,
           abstract: article.abstract,
           content: article.content,
-          tags: Array.isArray(article.tags) ? article.tags.join(',') : article.tags
+          tags: Array.isArray(article.tags) ? article.tags.join(',') : article.tags,
+          created: article.created,
+          created_by: article.created_by
         }
       },
       parseMarkdown() {
         this.parsed = markdown.parse(this.article.content)
         this.$nextTick().then(() => Prism.highlightAll())
+      },
+      hasPermission(scope) {
+        return auth.hasPermission(scope)
+      },
+      hasPermissionForUser(scope, userId) {
+        return auth.hasPermissionForUser(scope, userId)
       }
     },
     created () {

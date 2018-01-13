@@ -5,10 +5,35 @@ html {
 
 body {
     min-height: 100vh;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.46rem;
+    color: #2a2a2a;
 }
 
 h1 {
-    margin-bottom: 1.25rem;
+    font-size: 1.5rem;
+    margin-bottom: 2.08rem;
+    font-weight: 700;
+}
+
+h2 {
+    margin-top: 2.08rem;
+    font-size: 1.1875rem;
+}
+
+h3, h4, h5 {
+    font-size: 1.1rem;
+}
+
+p {
+    margin-bottom: 1.39rem;
+}
+ul {
+    margin-bottom: 1.39rem;
+}
+
+a {
+    color: #07a; /*#1F89BA;*/
 }
 
 .list-group {
@@ -17,6 +42,10 @@ h1 {
 
 a.list-group-item {
     color: #222;
+}
+
+[v-cloak] {
+    color: red;
 }
 
 .layout-default {
@@ -75,7 +104,7 @@ a.list-group-item {
 
     /* Space out the masthead */
     .header {
-        margin-bottom: 2rem;
+        margin-bottom: 3rem;
     }
 
     /* Remove the bottom border on the jumbotron for visual effect */
@@ -123,16 +152,9 @@ body.login {
     border-top-right-radius: 0;
 }
 
-.navbar-nav .nav-item {
-
-}
-
-.navbar-nav .nav-link {
-}
-
 .navbar-expand-lg .navbar-nav .nav-link {
-    background-color: rgba(255,255,255,0.8);
-    color: #4c5058;
+    background-color: rgba(0,0,0,0.125);
+    color: white;
     font-weight: bold;
     margin-left: 1rem;
     padding-right: 1rem;
@@ -141,7 +163,7 @@ body.login {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link:hover {
-    background-color: #fff;
+    background-color: rgba(0,0,0,0.2);
 }
 
 .navbar-brand {
@@ -149,6 +171,7 @@ body.login {
     font-size: 2.2rem;
     font-weight: 400;
     text-shadow: 0 1px #3fb07d;
+    margin-left: -1rem;
 }
 .navbar-brand:hover {
     color: #fff;
@@ -200,20 +223,19 @@ body.login {
     background: none;
 }
 
-.btn-secondary {
-    background-color: #a6aeb6;
-}
-
 .article__ruler {
     margin: 2rem 0;
 }
-
+.article__content {
+    margin-bottom: 1rem;
+}
 .article__tags {
     margin: 2rem 0;
 }
 
 pre[class*="language-"] {
-    padding: 2rem;
+    margin: 1.5rem 0;
+    padding: 1.39rem;
 }
 
 .actions {
@@ -224,4 +246,11 @@ pre[class*="language-"] {
 
 .actions__title {
     display: inline;
+}
+
+.actions__button {
+    margin-left: 0.5rem;
+}
+.actions__button:first-child {
+    margin-left: 0;
 }

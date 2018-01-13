@@ -15,7 +15,7 @@
                             <li class="nav-item">
                                 <router-link class="nav-link" to="/tags">Tags</router-link>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" v-if="hasPermission('article.add')">
                                 <router-link class="nav-link" to="/articles/add">Neu</router-link>
                             </li>
                             <li class="nav-item">
@@ -41,7 +41,7 @@
         </div>
         <footer class="footer">
             <div class="container">
-                <span class="text-muted">&copy; 2018 made with love by...</span>
+                <span class="text-muted">&copy; 2018</span>
             </div>
         </footer>
     </div>
@@ -53,6 +53,11 @@
     data () {
       return {
         loggedIn: auth.loggedIn()
+      }
+    },
+    methods: {
+      hasPermission(scope) {
+        return auth.hasPermission(scope)
       }
     },
     created () {
