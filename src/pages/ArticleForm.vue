@@ -12,11 +12,6 @@
                 <div class="invalid-feedback">{{ errors.title }}</div>
             </div>
             <div class="form-group">
-                <label for="abstract">Abstract</label>
-                <textarea v-model="article.abstract" :class="getClass('abstract')" id="abstract"></textarea>
-                <div class="invalid-feedback">{{ errors.abstract }}</div>
-            </div>
-            <div class="form-group">
                 <label for="content">Content</label>
                 <textarea-upload :url="'/upload'" v-model="article.content" :class="getClass('content')" id="content" rows="10"
                                  cols="10"></textarea-upload>
@@ -41,8 +36,8 @@
                 <button type="button" class="btn btn-secondary actions__button" @click="cancel" ref="cancel">Abbrechen</button>
             </div>
             <div v-if="!id" class="actions">
-                <button v-if="hasPermissionForUser('article.add')" type="button" class="btn btn-primary actions__button" @click="save" ref="submit">Eintrag speichern</button>
-                <button v-if="hasPermissionForUser('article.add')" type="button" class="btn btn-secondary actions__button" @click="reset">Zurücksetzen</button>
+                <button v-if="hasPermission('article.add')" type="button" class="btn btn-primary actions__button" @click="save" ref="submit">Eintrag speichern</button>
+                <button v-if="hasPermission('article.add')" type="button" class="btn btn-secondary actions__button" @click="reset">Zurücksetzen</button>
                 <button type="button" class="btn btn-secondary actions__button" @click="cancel" ref="cancel">Abbrechen</button>
             </div>
         </div>
@@ -87,7 +82,6 @@
         loading: false,
         article: {
           title: '',
-          abstract: '',
           content: '',
           tags: ''
         },
@@ -118,7 +112,6 @@
         this.formSent = false
         this.article = {
           title: '',
-          abstract: '',
           content: '',
           tags: ''
         }
@@ -167,7 +160,6 @@
       getArticle () {
         return {
           title: this.article.title,
-          abstract: this.article.abstract,
           content: this.article.content,
           tags: this.article.tags
         }
@@ -175,7 +167,6 @@
       setArticle (article) {
         this.article = {
           title: article.title,
-          abstract: article.abstract,
           content: article.content,
           tags: Array.isArray(article.tags) ? article.tags.join(',') : article.tags,
           created: article.created,

@@ -1,13 +1,36 @@
 <template>
     <layout-login>
-        <div class="form-signin">
-            <h4>Einstellungen</h4>
-            <input v-model="apiUrl" type="text" id="apiUrl" class="form-control" placeholder="API-URL" v-focus>
-            <button v-if="!isTested || !isValid" type="button" class="btn btn-secondary btn-block" @click="testUrl" ref="loginBtn">Test</button>
-            <button v-if="isTested && isValid" type="button" class="btn btn-secondary btn-block" @click="saveUrl" ref="loginBtn">Speichern</button>
-            <div v-if="isTested && isValid" class="alert alert-success">API-URL ist korrekt</div>
-            <div v-if="isTested && !isValid" class="alert alert-danger">API-URL ist falsch</div>
-            <p><a href="./">Zurück zur App</a></p>
+        <div class="form-settings">
+
+            <h1>API-Einstellungen</h1>
+
+            <form v-on:submit.prevent>
+                <div class="form-group row">
+                    <label for="apiUrl" class="col-sm-2 col-form-label">API-URL</label>
+                    <div class="col-sm-10">
+                        <div class="input-group mb-3">
+                            <input v-on:focus="resetValidation" ref="apiUrl" v-model="apiUrl" type="text" id="apiUrl" class="form-control" placeholder="API-URL eintragen" v-focus required>
+                            <div class="input-group-append">
+                                <button @click="testUrl" class="btn btn-secondary" ref="btnTest" type="button">Testen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="token" class="col-sm-2 col-form-label">API-Token</label>
+                    <div class="col-sm-10">
+                        <textarea v-model="apiToken" type="text" cols="50" rows="6" class="form-control" id="token" placeholder="Kein API-Token vorhanden"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <button type="button" class="btn btn-primary" @click="saveUrl">Speichern</button>
+                        <a class="btn btn-link" href="./">Zurück zur App</a>
+                    </div>
+                </div>
+                <div class="valid-feedback">Die API-URL ist gültig.</div>
+                <div class="invalid-feedback">Die API-URL ist ungültig oder der Server ist nicht erreichbar.</div>
+            </form>
         </div>
     </layout-login>
 </template>
@@ -18,36 +41,55 @@
   export default {
     data () {
       return {
-        apiUrl: localStorage.API_URL,
-        apiToken: localStorage.API_TOKEN,
-        isValid: false,
-        isTested: false
+        apiUrl: this.getLocalStorageItem('API_URL', ''),
+        apiToken: this.getLocalStorageItem('API_TOKEN', '')
       }
     },
     methods: {
+      getLocalStorageItem (key, defaultValue = null) {
+        let value = localStorage.getItem(key)
+        if (null === value) {
+          value = defaultValue
+        }
+        return value
+      },
+      setLocalStorageItem (key, value) {
+        value = value.trim();
+        if (value.length == 0) {
+          localStorage.removeItem(key)
+        } else {
+          localStorage.setItem(key, value)
+        }
+      },
+      resetValidation() {
+        this.$refs.apiUrl.classList.remove('is-valid')
+        this.$refs.apiUrl.classList.remove('is-invalid')
+        this.$refs.btnTest.classList.remove('btn-danger')
+        this.$refs.btnTest.classList.remove('btn-success')
+        this.$refs.btnTest.classList.add('btn-secondary')
+      },
       saveUrl() {
-        localStorage.API_URL = this.apiUrl
-        delete localStorage.API_TOKEN
-        this.isValid = false
-        this.isTested = false
+        this.setLocalStorageItem('API_URL', this.apiUrl)
+        this.setLocalStorageItem('API_TOKEN', this.apiToken)
       },
       testUrl() {
+        this.resetValidation()
         let http = axios.create()
         let url = this.apiUrl + '/ping'
-        this.isTested = true
         http.get(url)
           .then((response) => {
             if (response.data.name == 'ch.tebe.notes') {
-                this.isValid = true
+                this.$refs.apiUrl.classList.add('is-valid')
+                this.$refs.btnTest.classList.add('btn-success')
             }
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(() => {
+            this.$refs.apiUrl.classList.add('is-invalid')
+            this.$refs.btnTest.classList.add('btn-danger')
           });
       }
     }
   }
-
 </script>
 
 <style scoped>

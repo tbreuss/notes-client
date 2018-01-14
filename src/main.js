@@ -20,6 +20,13 @@ Storage.prototype.getObj = function (key) {
 
 Vue.config.productionTip = false
 
+Vue.config.errorHandler = function (err, vm, info) {
+  alert('An error occured. Please see console error log')
+  console.error(err)
+  console.error(vm)
+  console.error(info)
+}
+
 Vue.directive('focus', {
   // When the bound element is inserted into the DOM...
   inserted: function (el) {

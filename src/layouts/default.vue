@@ -9,7 +9,7 @@
                     </button>
                     <div v-if="loggedIn" class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
+                            <li class="nav-item">
                                 <router-link class="nav-link" to="/articles">Einträge</router-link>
                             </li>
                             <li class="nav-item">
@@ -43,8 +43,8 @@
             </div>
         </div>
         <footer class="footer">
-            <div class="container pl-0 pr-0">
-                <span class="text-muted">&copy; 2018</span> | <router-link class="nav-link" to="/settings">Einstellungen</router-link>
+            <div class="container">
+                <span>&copy; 2018 Thomas Breuss &nbsp;|&nbsp;</span> <router-link to="/settings">App-Einstellungen</router-link>
             </div>
         </footer>
     </div>
