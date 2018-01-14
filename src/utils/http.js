@@ -1,7 +1,7 @@
 import axios from 'axios'
 import router from '@/router'
 
-let baseUrl = 'https://kdb-api.tebe.ch/public/api.php/'
+let baseUrl = 'https://api.notes.tebe.ch/api.php/'
 
 if (process.env.NODE_ENV == 'development') {
   baseUrl = 'http://localhost:9999/api.php/'

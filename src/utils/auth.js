@@ -35,9 +35,11 @@ export default {
   hasPermission (scope)
   {
     let payload = this.getPayload()
+    // todo: check if user.role exists
     if (payload.user.role == 'admin') {
       return true
     }
+    // todo: check if user.scopes exists and is an array
     if (payload.user.scopes.indexOf(scope) != -1) {
       return true
     }
@@ -47,9 +49,11 @@ export default {
   hasPermissionForUser(scope, userId)
   {
     let payload = this.getPayload()
+    // todo: check if user.role exists
     if (payload.user.role == 'admin') {
       return true
     }
+    // todo: check if user.scopes exists and is an array
     if (payload.user.scopes.indexOf(scope) != -1) {
       if (payload.user.id == userId) {
         return true
