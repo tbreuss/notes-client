@@ -23,7 +23,7 @@
                                     {{ getUsername() }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <router-link to="/settings" class="dropdown-item">Einstellungen</router-link>
+                                    <!-- router-link to="/user/settings" class="dropdown-item">Einstellungen</router-link -->
                                     <router-link to="/logout" class="dropdown-item">Logout</router-link>
                                 </div>
                             </li>
