@@ -1,8 +1,8 @@
 <template>
     <div id="app" class="layout-default d-flex flex-column">
         <header class="header clearfix">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg">
+            <div class="container pl-0 pr-0">
+                <nav class="navbar navbar-expand-md navbar-dark pl-0 pr-0">
                     <router-link class="navbar-brand" to="/">Notes</router-link>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -18,29 +18,32 @@
                             <li class="nav-item" v-if="hasPermission('article.add')">
                                 <router-link class="nav-link" to="/articles/add">Neu</router-link>
                             </li>
-                            <li class="nav-item">
-                                <router-link v-if="loggedIn" to="/logout" class="nav-link">Logout</router-link>
-                                <router-link v-if="!loggedIn" to="/login" class="nav-link">Login</router-link>
+                            <li v-if="loggedIn" class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ getUsername() }}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <router-link to="/settings" class="dropdown-item">Einstellungen</router-link>
+                                    <router-link to="/logout" class="dropdown-item">Logout</router-link>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </nav>
             </div>
         </header>
-        <div class="container" style="flex:1">
-            <main role="main">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <slot/>
-                    </div>
-                    <div class="col-lg-3">
-                        <slot name="aside"></slot>
-                    </div>
+        <div class="container container-content" style="flex:1">
+            <div class="row">
+                <div class="col-md-9 pl-sm-0 pr-sm-0 pr-md-2 pr-lg-3">
+                    <slot/>
                 </div>
-            </main>
+                <div class="col-md-3 pl-sm-0 pr-sm-0 pl-md-2 pl-lg-3">
+                    <slot name="aside"></slot>
+                </div>
+            </div>
         </div>
         <footer class="footer">
-            <div class="container">
+            <div class="container pl-0 pr-0">
                 <span class="text-muted">&copy; 2018</span>
             </div>
         </footer>
@@ -58,6 +61,10 @@
     methods: {
       hasPermission(scope) {
         return auth.hasPermission(scope)
+      },
+      getUsername() {
+        let payload = auth.getPayload()
+        return payload['user']['name']
       }
     },
     created () {

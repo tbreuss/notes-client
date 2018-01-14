@@ -171,7 +171,6 @@ body.login {
     font-size: 2.2rem;
     font-weight: 400;
     text-shadow: 0 1px #3fb07d;
-    margin-left: -1rem;
 }
 .navbar-brand:hover {
     color: #fff;
@@ -226,9 +225,11 @@ body.login {
 .article__ruler {
     margin: 2rem 0;
 }
+
 .article__content {
     margin-bottom: 1rem;
 }
+
 .article__tags {
     margin: 2rem 0;
 }
@@ -251,6 +252,17 @@ pre[class*="language-"] {
 .actions__button {
     margin-left: 0.5rem;
 }
+
 .actions__button:first-child {
     margin-left: 0;
+}
+
+.container {
+    /*outline: 1px solid red;*/
+}
+
+@media (min-width: 576px) {
+    .container-content . {
+        /*outline: 1px solid blue;*/
+    }
 }
