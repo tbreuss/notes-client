@@ -4,14 +4,14 @@ import {http} from '@/utils/http'
 export default {
   login (email, pass, cb) {
     cb = arguments[arguments.length - 1]
-    if (localStorage.token) {
+    if (localStorage.API_TOKEN) {
       if (cb) cb(true)
       this.onChange(true)
       return
     }
     postLogin({username:email, password:pass})
       .then(token => {
-        localStorage.setItem('token', token)
+        localStorage.setItem('API_TOKEN', token)
         if (cb) cb(true)
         this.onChange(true)
       })
@@ -22,7 +22,7 @@ export default {
   },
 
   getToken () {
-    return localStorage.token
+    return localStorage.API_TOKEN
   },
 
   getPayload () {
@@ -63,13 +63,13 @@ export default {
   },
 
   logout (cb) {
-    delete localStorage.token
+    delete localStorage.API_TOKEN
     if (cb) cb()
     this.onChange(false)
   },
 
   loggedIn () {
-    return !!localStorage.token
+    return !!localStorage.API_TOKEN
   },
 
   onChange () {}

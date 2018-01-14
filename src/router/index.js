@@ -9,6 +9,7 @@ import Articles from '@/pages/Articles'
 import Article from '@/pages/Article'
 import Login from '@/pages/Login'
 import NotFound from '@/pages/NotFound'
+import Settings from '@/pages/Settings'
 import Start from '@/pages/Start'
 import Tags from '@/pages/Tags'
 import Users from '@/pages/Users'
@@ -33,6 +34,11 @@ export default new Router({
       name: 'start',
       component: Start,
       beforeEnter: requireAuth
+    },
+    {
+      path: '/settings',
+      name: 'settings',
+      component: Settings
     },
     {
       path: '/articles',

@@ -1,19 +1,19 @@
 import axios from 'axios'
 import router from '@/router'
 
-let baseUrl = 'https://api.notes.tebe.ch/api.php/'
+//let baseUrl = 'https://api.notes.tebe.ch/api.php/'
 
-if (process.env.NODE_ENV == 'development') {
-  baseUrl = 'http://localhost:9999/api.php/'
-}
+//if (process.env.NODE_ENV == 'development') {
+//  baseUrl = 'http://localhost:9999/api.php/'
+//}
 
 let instance = axios.create({
-  baseURL: baseUrl
+  baseURL: localStorage.API_URL
 })
 
 instance.interceptors.request.use(config => {
-  if (localStorage.token) {
-    config.headers.Authorization = 'Bearer ' + localStorage.token
+  if (localStorage.API_TOKEN) {
+    config.headers.Authorization = 'Bearer ' + localStorage.API_TOKEN
   }
   //console.info("Axios request success", config)
   return config

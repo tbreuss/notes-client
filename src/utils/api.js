@@ -79,6 +79,11 @@ function getUsers (params) {
   return http.get(url, {params: params}).then(response => response.data)
 }
 
+function getPing () {
+  var url = 'ping'
+  return http.get(url)
+}
+
 export {
   getArticle,
   getArticles,
@@ -88,5 +93,6 @@ export {
   deleteArticle,
   getTags,
   getSelectedTags,
-  getUsers
+  getUsers,
+  getPing
 }

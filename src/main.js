@@ -9,6 +9,7 @@ import ModalDialog from '@/components/ModalDialog'
 import TextareaUpload from '@/components/TextareaUpload'
 import LayoutDefault from '@/layouts/default'
 import LayoutLogin from '@/layouts/login'
+import { getPing } from '@/utils/api'
 
 Storage.prototype.setObj = function (key, obj) {
   return this.setItem(key, JSON.stringify(obj))
@@ -46,6 +47,12 @@ Vue.component('modal-dialog', ModalDialog)
 Vue.component('textarea-upload', TextareaUpload)
 Vue.component('layout-login', LayoutLogin)
 Vue.component('layout-default', LayoutDefault)
+
+
+getPing()
+  .catch((errors) => {
+    router.push('/settings')
+  })
 
 /* eslint-disable no-new */
 new Vue({
