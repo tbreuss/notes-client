@@ -9,6 +9,7 @@
                          class="list-group-item d-flex justify-content-between align-items-center"
                          :key="article.id">{{ article.title }}
                 <span v-if="article.views" class="badge badge-secondary">{{ article.views }}</span>
+                <span v-if="article.likes" class="badge badge-secondary">{{ article.likes }}</span>
                 <span v-if="article.modified" class="badge badge-secondary">{{ article.modified | date
                     }}</span>
                 <span v-if="article.created" class="badge badge-secondary">{{ article.created | date

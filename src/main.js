@@ -9,6 +9,8 @@ import ModalDialog from '@/components/ModalDialog'
 import TextareaUpload from '@/components/TextareaUpload'
 import LayoutDefault from '@/layouts/default'
 import LayoutLogin from '@/layouts/login'
+import LayoutStart from '@/layouts/start'
+import Navbar from '@/components/Navbar'
 import { getPing } from '@/utils/api'
 
 Storage.prototype.setObj = function (key, obj) {
@@ -54,7 +56,8 @@ Vue.component('modal-dialog', ModalDialog)
 Vue.component('textarea-upload', TextareaUpload)
 Vue.component('layout-login', LayoutLogin)
 Vue.component('layout-default', LayoutDefault)
-
+Vue.component('layout-start', LayoutStart)
+Vue.component('navbar', Navbar)
 
 getPing()
   .catch((errors) => {

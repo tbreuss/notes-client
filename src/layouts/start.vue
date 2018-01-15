@@ -5,14 +5,9 @@
                 <navbar></navbar>
             </div>
         </header>
-        <div class="container container-content" style="flex:1">
+        <div class="container container-content pl-sm-0 pr-sm-0" style="flex:1">
             <div class="row">
-                <div class="col-md-9 pl-sm-0 pr-sm-0 pr-md-2 pr-lg-3">
-                    <slot/>
-                </div>
-                <div class="col-md-3 pl-sm-0 pr-sm-0 pl-md-2 pl-lg-3">
-                    <slot name="aside"></slot>
-                </div>
+                <slot></slot>
             </div>
         </div>
         <footer class="footer">

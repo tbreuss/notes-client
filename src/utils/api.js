@@ -13,7 +13,7 @@ function getArticles (params) {
 }
 
 function getSelectedArticles (mode) {
-  var url = 'lastest'
+  var url = 'latest'
   if (mode == 'popular') {
     url = 'popular'
   }
@@ -22,6 +22,9 @@ function getSelectedArticles (mode) {
   }
   if (mode == 'modified') {
     url = 'modified'
+  }
+  if (mode == 'liked') {
+    url = 'liked'
   }
   return http
     .get(url)
