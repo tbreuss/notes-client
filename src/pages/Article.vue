@@ -31,15 +31,19 @@
                     </tr>
                     <tr>
                         <td>Erstellt von</td>
-                        <td>{{ article.created_by }}</td>
+                        <td>{{ article.created_by_user.name }}
+                            <span v-if="article.created_by_user.deleted > 0">[gelöschter Benutzer]</span>
+                        </td>
                     </tr>
-                    <tr>
+                    <tr v-if="article.modified">
                         <td>Geändert am</td>
-                        <td>{{ article.modified ? article.modified : '&ndash;' }}</td>
+                        <td>{{ article.modified }}</td>
                     </tr>
-                    <tr>
+                    <tr v-if="article.modified_by_user.name">
                         <td>Geändert von</td>
-                        <td>{{ article.modified_by ? article.modified_by : '&ndash;' }}</td>
+                        <td>{{ article.modified_by_user.name }}
+                            <span v-if="article.modified_by_user.deleted > 0">[gelöschter Benutzer]</span>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -73,7 +77,10 @@
     data () {
       return {
         loading: false,
-        article: {},
+        article: {
+          created_by_user: {},
+          modified_by_user: {},
+        },
         parsed: ''
       }
     },
