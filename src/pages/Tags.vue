@@ -22,21 +22,21 @@
         <div slot="aside">
             <div class="aside-sort">
                 <h4 class="aside-sort__title">Sortieren nach</h4>
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-1" type="radio" value="name" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-1">Tagname</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" @change="loadData" id="tags-sort-radio-1" type="radio" value="name" v-model="sort">
+                    <label class="custom-control-label" for="tags-sort-radio-1">Tagname</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-2" type="radio" value="frequency" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-2">Häufigkeit</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" @change="loadData" id="tags-sort-radio-2" type="radio" value="frequency" v-model="sort">
+                    <label class="custom-control-label" for="tags-sort-radio-2">Häufigkeit</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-3" type="radio" value="changed" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-3">Letzter Änderung</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" @change="loadData" id="tags-sort-radio-3" type="radio" value="changed" v-model="sort">
+                    <label class="custom-control-label" for="tags-sort-radio-3">Letzter Änderung</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" @change="loadData" id="tags-sort-radio-4" type="radio" value="created" v-model="sort">
-                    <label class="form-check-label" for="tags-sort-radio-4">Letzter Eintrag</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" @change="loadData" id="tags-sort-radio-4" type="radio" value="created" v-model="sort">
+                    <label class="custom-control-label" for="tags-sort-radio-4">Letzter Eintrag</label>
                 </div>
             </div>
         </div>

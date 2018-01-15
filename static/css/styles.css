@@ -283,3 +283,11 @@ pre[class*="language-"] {
         /*outline: 1px solid blue;*/
     }
 }
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before,
+.custom-control-input:checked~.custom-control-label::before {
+    background-color: #4fc08d;
+}
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+    background-color: #4fc08d;
+}

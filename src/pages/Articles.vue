@@ -35,28 +35,28 @@
         <div slot="aside">
             <div class="aside-sort">
                 <h4 class="aside-sort__title">Sortieren nach</h4>
-                <div class="form-check">
-                    <input class="form-check-input" id="articles-sort-radio-1" @change="loadData" type="radio" value="title" v-model="sort">
-                    <label class="form-check-label" for="articles-sort-radio-1">Titel</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" id="articles-sort-radio-1" @change="loadData" type="radio" value="title" v-model="sort">
+                    <label class="custom-control-label" for="articles-sort-radio-1">Titel</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" id="articles-sort-radio-2" @change="loadData" type="radio" value="popular" v-model="sort">
-                    <label class="form-check-label" for="articles-sort-radio-2">Beliebtheit</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" id="articles-sort-radio-2" @change="loadData" type="radio" value="popular" v-model="sort">
+                    <label class="custom-control-label" for="articles-sort-radio-2">Beliebtheit</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" id="articles-sort-radio-3" @change="loadData" type="radio" value="changed" v-model="sort">
-                    <label class="form-check-label" for="articles-sort-radio-3">Letzter Änderung</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" id="articles-sort-radio-3" @change="loadData" type="radio" value="changed" v-model="sort">
+                    <label class="custom-control-label" for="articles-sort-radio-3">Letzter Änderung</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" id="articles-sort-radio-4" @change="loadData" type="radio" value="created" v-model="sort">
-                    <label class="form-check-label" for="articles-sort-radio-4">Letzter Eintrag</label>
+                <div class="custom-control custom-radio">
+                    <input class="custom-control-input" id="articles-sort-radio-4" @change="loadData" type="radio" value="created" v-model="sort">
+                    <label class="custom-control-label" for="articles-sort-radio-4">Letzter Eintrag</label>
                 </div>
             </div>
             <div class="aside-tags" v-if="tags.length > 0">
                 <h4 class="aside-tags__title">Tags</h4>
-                <div v-for="(tag, index) in tags" class="form-check">
-                    <input class="form-check-input" :id="'aside-tags__check--' + index" @change="loadData" type="checkbox" :value="tag" v-model="selectedTags">
-                    <label class="form-check-label" :for="'aside-tags__check--' + index">{{ tag }}</label>
+                <div v-for="(tag, index) in tags" class="custom-control custom-checkbox">
+                    <input class="custom-control-input" :id="'aside-tags__check--' + index" @change="loadData" type="checkbox" :value="tag" v-model="selectedTags">
+                    <label class="custom-control-label" :for="'aside-tags__check--' + index">{{ tag }}</label>
                 </div>
             </div>
         </div>
