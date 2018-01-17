@@ -20,8 +20,8 @@
                     <tr>
                         <td>Views</td>
                         <td>
-                            {{ article.views }}
-                            <span v-if="article.views_date">zuletzt am {{ article.views_date | date }}</span>
+                            {{ article.views }} Ansichten
+                            <span v-if="article.views_date">/ zuletzt am {{ article.views_date | date }}</span>
                         </td>
                     </tr>
                     <tr>
