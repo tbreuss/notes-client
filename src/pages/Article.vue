@@ -19,30 +19,33 @@
                     </tr>
                     <tr>
                         <td>Views</td>
-                        <td>{{ article.views }}</td>
+                        <td>
+                            {{ article.views }}
+                            <span v-if="article.views_date">zuletzt am {{ article.views_date | date }}</span>
+                        </td>
                     </tr>
                     <tr>
                         <td>Likes</td>
                         <td>{{ article.likes }}</td>
                     </tr>
-                    <tr>
+                    <tr v-if="article.created">
                         <td>Erstellt am</td>
-                        <td>{{ article.created }}</td>
-                    </tr>
-                    <tr>
-                        <td>Erstellt von</td>
-                        <td>{{ article.created_by_user.name }}
-                            <span v-if="article.created_by_user.deleted > 0">[gelöschter Benutzer]</span>
+                        <td>
+                            {{ article.created | date }}
+                            <span v-if="article.created_by_user">
+                                von {{ article.created_by_user.name }}
+                                <span v-if="article.created_by_user.deleted > 0">[gelöschter Benutzer]</span>
+                            </span>
                         </td>
                     </tr>
                     <tr v-if="article.modified">
                         <td>Geändert am</td>
-                        <td>{{ article.modified }}</td>
-                    </tr>
-                    <tr v-if="article.modified_by_user.name">
-                        <td>Geändert von</td>
-                        <td>{{ article.modified_by_user.name }}
-                            <span v-if="article.modified_by_user.deleted > 0">[gelöschter Benutzer]</span>
+                        <td>
+                            {{ article.modified | date }}
+                            <span v-if="article.modified_by_user.name">
+                                von {{ article.modified_by_user.name }}
+                                <span v-if="article.modified_by_user.deleted > 0">[gelöschter Benutzer]</span>
+                            </span>
                         </td>
                     </tr>
                 </table>
