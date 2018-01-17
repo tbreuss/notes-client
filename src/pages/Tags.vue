@@ -44,23 +44,17 @@
 </template>
 
 <script>
-  import { getTags } from '../utils/api'
-
+  import { getTags } from '@/utils/api'
+  import storage from '../utils/storage'
   export default {
     data () {
       return {
         tags: [],
-        sort: this.getSort(),
+        sort: storage.getTagsPageSort(),
         loading: false
       }
     },
     methods: {
-      getSort: function () {
-        if (sessionStorage.getItem('TagsPage.sort')) {
-          return sessionStorage.getItem('TagsPage.sort')
-        }
-        return 'frequency'
-      },
       loadData: function () {
         this.loading = true
         var params = {
@@ -70,7 +64,7 @@
           .then((tags) => {
             this.tags = tags
             this.loading = false
-            sessionStorage.setItem('TagsPage.sort', this.sort)
+            storage.setTagsPageSort(this.sort)
           })
           .catch(error => {
             console.error(error)
@@ -78,7 +72,7 @@
       },
       toArticles: function (tag, e) {
         e.preventDefault()
-        sessionStorage.setObj('ArticlesPage.selectedTags', [tag])
+        storage.setArticlesTags([tag])
         this.$router.push('/articles')
       }
     },

@@ -1,17 +1,18 @@
-/* globals localStorage */
+
 import {http} from '@/utils/http'
+import storage from '../utils/storage'
 
 export default {
   login (email, pass, cb) {
     cb = arguments[arguments.length - 1]
-    if (localStorage.API_TOKEN) {
+    if (storage.getApiToken() !== null) {
       if (cb) cb(true)
       this.onChange(true)
       return
     }
     postLogin({username:email, password:pass})
       .then(token => {
-        localStorage.setItem('API_TOKEN', token)
+        storage.setApiToken(token)
         if (cb) cb(true)
         this.onChange(true)
       })
@@ -22,7 +23,7 @@ export default {
   },
 
   getToken () {
-    return localStorage.API_TOKEN
+    return storage.getApiToken()
   },
 
   getPayload () {
@@ -63,13 +64,13 @@ export default {
   },
 
   logout (cb) {
-    delete localStorage.API_TOKEN
+    storage.setApiToken(null)
     if (cb) cb()
     this.onChange(false)
   },
 
   loggedIn () {
-    return !!localStorage.API_TOKEN
+    return storage.getApiToken() !== null
   },
 
   onChange () {}

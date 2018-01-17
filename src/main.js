@@ -14,13 +14,6 @@ import LayoutStart from '@/layouts/start'
 import Navbar from '@/components/Navbar'
 import { getPing } from '@/utils/api'
 
-Storage.prototype.setObj = function (key, obj) {
-  return this.setItem(key, JSON.stringify(obj))
-}
-Storage.prototype.getObj = function (key) {
-  return JSON.parse(this.getItem(key))
-}
-
 Vue.config.productionTip = false
 
 Vue.config.errorHandler = function (err, vm, info) {

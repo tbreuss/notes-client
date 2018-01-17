@@ -21,17 +21,11 @@
     data () {
       return {
         tags: [],
-        sort: this.getSort(),
+        sort: 'name',
         loading: false
       }
     },
     methods: {
-      getSort: function () {
-        if (sessionStorage.getItem('UsersPage.sort')) {
-          return sessionStorage.getItem('UsersPage.sort')
-        }
-        return 'name'
-      },
       loadData: function () {
         this.loading = true
         var params = {
@@ -41,7 +35,6 @@
           .then((tags) => {
             this.tags = tags
             this.loading = false
-            sessionStorage.setItem('TagsPage.sort', this.sort)
           })
           .catch(error => {
             console.error(error)
@@ -49,7 +42,6 @@
       },
       toArticles: function (tag, e) {
         e.preventDefault()
-        sessionStorage.setObj('ArticlesPage.selectedTags', [tag])
         this.$router.push('/articles')
       }
     },

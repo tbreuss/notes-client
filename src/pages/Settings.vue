@@ -37,13 +37,13 @@
 
 <script>
   import axios from 'axios'
-  import ls from '@/utils/localstorage'
+  import storage from '@/utils/storage'
 
   export default {
     data () {
       return {
-        apiUrl: ls.getApiUrl(),
-        apiToken: ls.getApiToken()
+        apiUrl: storage.getApiUrl(),
+        apiToken: storage.getApiToken()
       }
     },
     methods: {
@@ -55,8 +55,8 @@
         this.$refs.btnTest.classList.add('btn-secondary')
       },
       saveUrl() {
-        ls.setApiUrl(this.apiUrl)
-        ls.setApiToken(this.apiToken)
+        storage.setApiUrl(this.apiUrl)
+        storage.setApiToken(this.apiToken)
       },
       testUrl() {
         this.resetValidation()

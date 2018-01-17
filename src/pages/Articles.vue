@@ -65,6 +65,7 @@
 
 <script>
   import { getArticles, getSelectedTags } from '../utils/api'
+  import storage from '../utils/storage'
 
   export default {
     name: 'ArticlesPage',
@@ -73,11 +74,11 @@
         loading: false,
         articles: [],
         tags: [],
-        q: this.getQ(),
-        sort: this.getSort(),
-        page: this.getPage(),
+        q: storage.getArticlesSearch(),
+        sort: storage.getArticlesSort(),
+        page: storage.getArticlesPage(),
         paging: {},
-        selectedTags: this.getSelectedTags(),
+        selectedTags: storage.getArticlesTags(),
       }
     },
     computed: {
@@ -110,9 +111,9 @@
             this.articles = data.articles
             this.paging = data.paging
             this.loading = false
-            sessionStorage.setItem('ArticlesPage.page', this.page)
-            sessionStorage.setItem('ArticlesPage.q', this.q)
-            sessionStorage.setItem('ArticlesPage.sort', this.sort)
+            storage.setArticlesPage(this.page)
+            storage.setArticlesSearch(this.q)
+            storage.setArticlesSort(this.sort)
             this.loadTags()
           })
       },
@@ -137,35 +138,11 @@
         getSelectedTags(params)
           .then((tags) => {
             this.tags = tags
-            sessionStorage.setObj('ArticlesPage.selectedTags', this.selectedTags)
+            storage.setArticlesTags(this.selectedTags)
           })
           .catch(error => {
             console.error(error)
           })
-      },
-      getPage: function () {
-        if (sessionStorage.getItem('ArticlesPage.page')) {
-          return sessionStorage.getItem('ArticlesPage.page')
-        }
-        return 1
-      },
-      getQ: function () {
-        if (sessionStorage.getItem('ArticlesPage.q')) {
-          return sessionStorage.getItem('ArticlesPage.q')
-        }
-        return ''
-      },
-      getSort: function () {
-        if (sessionStorage.getItem('ArticlesPage.sort')) {
-          return sessionStorage.getItem('ArticlesPage.sort')
-        }
-        return 'title'
-      },
-      getSelectedTags: function () {
-        if (sessionStorage.getObj('ArticlesPage.selectedTags')) {
-          return sessionStorage.getObj('ArticlesPage.selectedTags')
-        }
-        return []
       }
     },
     created: function () {
