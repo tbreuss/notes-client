@@ -37,30 +37,16 @@
 
 <script>
   import axios from 'axios'
+  import ls from '@/utils/localstorage'
 
   export default {
     data () {
       return {
-        apiUrl: this.getLocalStorageItem('API_URL', ''),
-        apiToken: this.getLocalStorageItem('API_TOKEN', '')
+        apiUrl: ls.getApiUrl(),
+        apiToken: ls.getApiToken()
       }
     },
     methods: {
-      getLocalStorageItem (key, defaultValue = null) {
-        let value = localStorage.getItem(key)
-        if (null === value) {
-          value = defaultValue
-        }
-        return value
-      },
-      setLocalStorageItem (key, value) {
-        value = value.trim();
-        if (value.length == 0) {
-          localStorage.removeItem(key)
-        } else {
-          localStorage.setItem(key, value)
-        }
-      },
       resetValidation() {
         this.$refs.apiUrl.classList.remove('is-valid')
         this.$refs.apiUrl.classList.remove('is-invalid')
@@ -69,8 +55,8 @@
         this.$refs.btnTest.classList.add('btn-secondary')
       },
       saveUrl() {
-        this.setLocalStorageItem('API_URL', this.apiUrl)
-        this.setLocalStorageItem('API_TOKEN', this.apiToken)
+        ls.setApiUrl(this.apiUrl)
+        ls.setApiToken(this.apiToken)
       },
       testUrl() {
         this.resetValidation()
