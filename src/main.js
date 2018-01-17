@@ -1,5 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+import _ from 'lodash'
 import Vue from 'vue'
 import router from '@/router'
 import App from '@/App'
@@ -46,8 +47,11 @@ Vue.directive('permission', {
 Vue.filter('date', function (strDate) {
   //  Safari & IE browsers do not support the date format “yyyy-mm-dd”
   strDate = strDate.replace(/-/g, '/')
-  var date = new Date(strDate)
-  return date.toLocaleDateString()
+  let date = new Date(strDate)
+  let year = date.getFullYear()
+  let month = _.padStart(date.getMonth()+1, 2, '0')
+  let day = _.padStart(date.getDate(), 2, '0')
+  return `${day}.${month}.${year}`;
 })
 
 Vue.component('articles', ArticlesComponent)
