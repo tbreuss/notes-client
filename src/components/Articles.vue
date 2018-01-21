@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import { getSelectedArticles } from '../utils/api'
+  import http from '../utils/http'
 
   export default {
     data () {
@@ -31,20 +31,32 @@
     },
     props: ['mode'],
     methods: {
-      loadData: function () {
+      loadArticles () {
         this.loading = true
-        getSelectedArticles(this.mode)
-          .then(articles => {
-            this.articles = articles
-            this.loading = false
-          })
-          .catch(e => {
-            console.error(e)
-          })
+        http.get(this.getUrl(), {}, (articles) => {
+          this.articles = articles
+          this.loading = false
+        })
+      },
+      getUrl () {
+        let url = 'latest'
+        if (this.mode == 'popular') {
+          url = 'popular'
+        }
+        if (this.mode == 'latest') {
+          url = 'latest'
+        }
+        if (this.mode == 'modified') {
+          url = 'modified'
+        }
+        if (this.mode == 'liked') {
+          url = 'liked'
+        }
+        return url
       }
     },
-    created: function () {
-      this.loadData()
+    mounted () {
+      this.loadArticles()
     }
   }
 

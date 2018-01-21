@@ -23,7 +23,6 @@
 </template>
 
 <script>
-  import { postLogin } from '@/utils/api'
   import auth from '@/utils/auth'
 
   export default {

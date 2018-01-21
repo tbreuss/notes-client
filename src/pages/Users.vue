@@ -1,52 +1,43 @@
 <template>
     <layout-default v-cloak>
         <h4>Benutzer</h4>
-        <span v-if="tags.length>0">Zeige {{ tags.length }} Benutzer</span>
+        <span v-if="users.length>0">Zeige {{ users.length }} Benutzer</span>
         <span class="loading" v-if="loading">
             ...lade Daten
         </span>
         <ul class="list-group">
-            <router-link v-for="tag in tags" :to="'/users/' + tag.id"
-                         class="list-group-item list-group-item-action" :key="tag.id">
-                {{ tag.name }}
+            <router-link v-for="user in users" :to="'/users/' + user.id"
+                         class="list-group-item list-group-item-action" :key="user.id">
+                {{ user.name }}
             </router-link>
         </ul>
     </layout-default>
 </template>
 
 <script>
-  import { getUsers } from '../utils/api'
+  import http from '../utils/http'
 
   export default {
     data () {
       return {
-        tags: [],
-        sort: 'name',
+        users: [],
         loading: false
       }
     },
     methods: {
-      loadData: function () {
+      loadUsers: function () {
         this.loading = true
         var params = {
           sort: this.sort
         }
-        getUsers(params)
-          .then((tags) => {
-            this.tags = tags
-            this.loading = false
-          })
-          .catch(error => {
-            console.error(error)
-          })
-      },
-      toArticles: function (tag, e) {
-        e.preventDefault()
-        this.$router.push('/articles')
+        http.get('users', params, (users) => {
+          this.users = users
+          this.loading = false
+        })
       }
     },
-    created: function () {
-      this.loadData()
+    mounted: function () {
+      this.loadUsers()
     }
   }
 

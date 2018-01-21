@@ -6,9 +6,10 @@
 </template>
 
 <script>
-  import { getUsers } from '../utils/api'
+  import http from '../utils/http'
 
   export default {
+    props: ['id'],
     data () {
       return {
         user: {},
@@ -16,23 +17,16 @@
       }
     },
     methods: {
-      loadData: function () {
+      loadUser () {
         this.loading = true
-        var params = {
-          sort: this.sort
-        }
-        getUser(params)
-          .then((tags) => {
-            this.tags = tags
-            this.loading = false
-          })
-          .catch(error => {
-            console.error(error)
-          })
+        http.get('users/' + this.id, {}, (user) => {
+          this.user = user
+          this.loading = false
+        })
       }
     },
-    created: function () {
-      this.loadData()
+    mounted () {
+      this.loadUser()
     }
   }
 

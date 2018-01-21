@@ -44,7 +44,7 @@
 </template>
 
 <script>
-  import { getTags } from '@/utils/api'
+  import http from '@/utils/http'
   import storage from '../utils/storage'
   export default {
     data () {
@@ -55,28 +55,25 @@
       }
     },
     methods: {
-      loadData: function () {
+      loadData () {
         this.loading = true
-        var params = {
+        let data = {}
+        data.params = {
           sort: this.sort
         }
-        getTags(params)
-          .then((tags) => {
-            this.tags = tags
-            this.loading = false
-            storage.setTagsPageSort(this.sort)
-          })
-          .catch(error => {
-            console.error(error)
-          })
+        http.get('tags', data, (tags) => {
+          this.tags = tags
+          this.loading = false
+          storage.setTagsPageSort(this.sort)
+        })
       },
-      toArticles: function (tag, e) {
+      toArticles (tag, e) {
         e.preventDefault()
         storage.setArticlesTags([tag])
         this.$router.push('/articles')
       }
     },
-    created: function () {
+    mounted () {
       this.loadData()
     }
   }

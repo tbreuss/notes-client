@@ -31,12 +31,12 @@
                 <div class="invalid-feedback">{{ errors.tags }}</div>
             </div>
             <div v-if="id>0" class="actions">
-                <button v-if="hasPermissionForUser('article.edit', article.created_by)" type="button" class="btn btn-primary actions__button" @click="save" ref="submit">Eintrag speichern</button>
+                <button v-if="hasPermissionForUser('article.edit', article.created_by)" type="button" class="btn btn-primary actions__button" @click="saveArticle" ref="submit">Eintrag speichern</button>
                 <button v-if="hasPermissionForUser('article.delete', article.created_by)" type="button" class="btn btn-danger actions__button" data-toggle="modal" data-target="#deleteDialog" ref="delete">Eintrag löschen</button>
                 <button type="button" class="btn btn-secondary actions__button" @click="cancel" ref="cancel">Abbrechen</button>
             </div>
             <div v-if="!id" class="actions">
-                <button v-if="hasPermission('article.add')" type="button" class="btn btn-primary actions__button" @click="save" ref="submit">Eintrag speichern</button>
+                <button v-if="hasPermission('article.add')" type="button" class="btn btn-primary actions__button" @click="saveArticle" ref="submit">Eintrag speichern</button>
                 <button v-if="hasPermission('article.add')" type="button" class="btn btn-secondary actions__button" @click="reset">Zurücksetzen</button>
                 <button type="button" class="btn btn-secondary actions__button" @click="cancel" ref="cancel">Abbrechen</button>
             </div>
@@ -71,8 +71,8 @@
 </template>
 
 <script>
-  import { getArticle, postArticle, putArticle, deleteArticle } from '@/utils/api'
   import auth from '@/utils/auth'
+  import http from '@/utils/http'
   import markdown from '@/utils/markdown'
 
   export default {
@@ -92,21 +92,12 @@
     },
     computed: {},
     methods: {
-      cancel() {
+      cancel () {
         if (this.id) {
           this.$router.push('/articles/' + this.id)
         } else {
           this.$router.push('/articles')
         }
-      },
-      deleteArticle() {
-        deleteArticle(this.id)
-          .then(() => {
-            this.$router.push('/articles')
-          })
-          .catch(error => {
-            console.error(error.response.data)
-          })
       },
       reset: function () {
         this.formSent = false
@@ -116,37 +107,46 @@
           tags: ''
         }
       },
-      save() {
+      saveArticle () {
         this.$refs.submit.disabled = true
         this.formSent = true
         let article = this.getArticle()
         if (this.id > 0) {
-          this.update(article)
+          this.updateArticle(article)
         } else {
-          this.insert(article)
+          this.insertArticle(article)
         }
       },
-      insert: function (article) {
-        postArticle(article)
-          .then(() => {
-            this.$refs.submit.disabled = false
-            this.$router.push('/articles')
-          })
-          .catch(error => {
-            this.errors = error.response.data
-            this.$refs.submit.disabled = false
+      loadArticle () {
+        this.loading = true
+        http.get('articles/' + this.id, {}, (article) => {
+            this.setArticle(article)
+            this.loading = false
           })
       },
-      update: function (article) {
-        putArticle(this.id, article)
-          .then(() => {
-            this.$refs.submit.disabled = false
-            this.$router.push('/articles/' + this.id)
-          })
-          .catch(error => {
-            this.errors = error.response.data
-            this.$refs.submit.disabled = false
-          })
+      insertArticle (article) {
+        http.post('add-article', article, () => {
+          this.$refs.submit.disabled = false
+          this.$router.push('/articles')
+        }, (error) => {
+          this.errors = error.response.data
+          this.$refs.submit.disabled = false
+        })
+      },
+      updateArticle (article) {
+        let url = 'articles/' + this.id
+        http.put(url, article, () => {
+          this.$refs.submit.disabled = false
+          this.$router.push('/articles/' + this.id)
+        }, (error) => {
+          this.errors = error.response.data
+          this.$refs.submit.disabled = false
+        })
+      },
+      deleteArticle () {
+        http.delete('articles/' + this.id, {}, () => {
+          this.$router.push('/articles')
+        })
       },
       getClass: function (field) {
         if (!this.formSent) {
@@ -173,30 +173,22 @@
           created_by: article.created_by
         }
       },
-      parseMarkdown() {
+      parseMarkdown () {
         this.parsed = markdown.parse(this.article.content)
         this.$nextTick().then(() => Prism.highlightAll())
       },
-      hasPermission(scope) {
+      hasPermission (scope) {
         return auth.hasPermission(scope)
       },
-      hasPermissionForUser(scope, userId) {
+      hasPermissionForUser (scope, userId) {
         return auth.hasPermissionForUser(scope, userId)
       }
     },
-    created () {
+    mounted () {
       if (this.id === undefined) {
         return
       }
-      this.loading = true
-      getArticle(this.id)
-        .then(article => {
-          this.setArticle(article)
-          this.loading = false
-        })
-        .catch(e => {
-          console.error(e)
-        })
+      this.loadArticle()
     }
   }
 

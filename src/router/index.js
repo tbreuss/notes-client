@@ -76,7 +76,8 @@ export default new Router({
       path: '/users/:id',
       name: 'user',
       component: User,
-      beforeEnter: requireAuth
+      beforeEnter: requireAuth,
+      props: true
     },
     {
       path: '/users',

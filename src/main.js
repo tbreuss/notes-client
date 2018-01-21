@@ -10,11 +10,11 @@ import LayoutDefault from '@/layouts/Default'
 import LayoutLogin from '@/layouts/Login'
 import LayoutStart from '@/layouts/Start'
 import Navbar from '@/components/Navbar'
-import { getPing } from '@/utils/api'
 import DateFilter from '@/filters/Date'
 import FocusDirective from './directives/Focus'
 import PermissionDirective from './directives/Permission'
 import router from '@/router'
+import http from '@/utils/http'
 
 Vue.config.productionTip = false
 
@@ -39,17 +39,17 @@ Vue.directive('permission', PermissionDirective)
 
 Vue.filter('date', DateFilter)
 
-getPing()
-  .then(() => {
-    new Vue({
-      el: '#app',
-      router,
-      template: '<App/>',
-      components: {
-        App
-      }
-    })
-  })
+new Vue({
+  el: '#app',
+  router,
+  template: '<App/>',
+  components: {
+    App
+  }
+})
+
+http.ping()
   .catch(() => {
     router.push('/settings')
   })
+

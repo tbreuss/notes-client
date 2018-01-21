@@ -21,7 +21,7 @@
                         <td>Views</td>
                         <td>
                             {{ article.views }} Ansichten
-                            <span v-if="article.views_date">/ zuletzt am {{ article.views_date | date }}</span>
+                            <span v-if="article.views_date">/ zuletzt gesehen am {{ article.views_date | date }}</span>
                         </td>
                     </tr>
                     <tr>
@@ -71,8 +71,8 @@
 </template>
 
 <script>
-  import { getArticle, deleteArticle } from '../utils/api'
   import auth from '../utils/auth'
+  import http from '../utils/http'
   import markdown from '../utils/markdown'
 
   export default {
@@ -87,32 +87,29 @@
         parsed: ''
       }
     },
-    mounted: function () {
-      this.loading = true
-      getArticle(this.id)
-        .then(article => {
+    methods: {
+      loadArticle() {
+        this.loading = true
+        let url = 'articles/' + this.id
+        http.get(url, {}, (article) => {
           this.article = article
           this.loading = false
           this.parsed = markdown.parse(article.content)
           this.$nextTick().then(() => Prism.highlightAll())
         })
-        .catch(e => {
-          console.error(e)
-        })
-    },
-    methods: {
+      },
       deleteArticle() {
-        deleteArticle(this.id)
-          .then(() => {
-            this.$router.push('/articles')
-          })
-          .catch(error => {
-            console.error(error.response.data)
-          })
+        let url = 'articles/' + this.id
+        http.delete(url, {}, () => {
+          this.$router.push('/articles')
+        })
       },
       hasPermission(scope, userId) {
         return auth.hasPermissionForUser(scope, userId)
       }
+    },
+    mounted: function () {
+      this.loadArticle()
     }
   }
 </script>
