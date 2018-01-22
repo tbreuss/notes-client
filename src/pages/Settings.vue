@@ -9,7 +9,7 @@
                     <label for="apiUrl" class="col-sm-2 col-form-label">API-URL</label>
                     <div class="col-sm-10">
                         <div class="input-group mb-3">
-                            <input v-on:focus="resetValidation" ref="apiUrl" v-model="apiUrl" type="text" id="apiUrl" class="form-control" placeholder="API-URL eintragen" v-focus required>
+                            <input v-on:focus="resetValidation" ref="apiUrl" v-model="apiUrl" type="text" id="apiUrl" class="form-control" placeholder="API-URL eintragen" v-focus readonly>
                             <div class="input-group-append">
                                 <button @click="testUrl" class="btn btn-secondary" ref="btnTest" type="button">Testen</button>
                             </div>
@@ -19,12 +19,12 @@
                 <div class="form-group row">
                     <label for="token" class="col-sm-2 col-form-label">API-Token</label>
                     <div class="col-sm-10">
-                        <textarea v-model="apiToken" type="text" cols="50" rows="6" class="form-control" id="token" placeholder="Kein API-Token vorhanden"></textarea>
+                        <textarea v-model="apiToken" type="text" cols="50" rows="6" class="form-control" id="token" placeholder="Kein API-Token vorhanden" readonly></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                        <button type="button" class="btn btn-primary" @click="saveUrl">Speichern</button>
+                        <!-- <button type="button" class="btn btn-primary" @click="saveUrl">Speichern</button>-->
                         <a class="btn btn-link" href="./">Zurück zur App</a>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
   export default {
     data () {
       return {
-        apiUrl: storage.getApiUrl(),
+        apiUrl: process.env.API_URL,
         apiToken: storage.getApiToken()
       }
     },
@@ -55,7 +55,6 @@
         this.$refs.btnTest.classList.add('btn-secondary')
       },
       saveUrl() {
-        storage.setApiUrl(this.apiUrl)
         storage.setApiToken(this.apiToken)
       },
       testUrl() {

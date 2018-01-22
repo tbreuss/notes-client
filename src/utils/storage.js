@@ -1,4 +1,3 @@
-const API_URL = 'API_URL'
 const API_TOKEN = 'API_TOKEN'
 const TAGS_PAGE_SORT = 'TagsPage.sort'
 const ARTICLES_PAGE = 'ArticlesPage.page'
@@ -47,12 +46,6 @@ function setToSessionStorage (key, value) {
 }
 
 export default {
-  getApiUrl () {
-    return getFromLocalStorage(API_URL, '')
-  },
-  setApiUrl (url) {
-    setToLocalStorage(API_URL, url)
-  },
   getApiToken () {
     return getFromLocalStorage(API_TOKEN, null)
   },

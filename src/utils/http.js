@@ -3,7 +3,7 @@ import router from '@/router'
 import storage from './storage'
 
 let instance = axios.create({
-  baseURL: storage.getApiUrl()
+  baseURL: process.env.API_URL
 })
 
 instance.interceptors.request.use(config => {
@@ -69,7 +69,7 @@ export default {
    */
   ping() {
     let http = axios.create({
-      baseURL: storage.getApiUrl()
+      baseURL: process.env.API_URL
     })
     return http.get('ping')
   }
