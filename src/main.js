@@ -16,6 +16,17 @@ import PermissionDirective from './directives/Permission'
 import router from '@/router'
 import http from '@/utils/http'
 
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'prismjs/prism'
+// todo: import languages
+import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-sql'
+import 'prismjs/components/prism-php'
+import 'prismjs/themes/prism.css'
+import '@/assets/css/styles.css'
+
+
 Vue.config.productionTip = false
 
 Vue.config.errorHandler = function (err, vm, info) {
