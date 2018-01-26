@@ -3,7 +3,7 @@
         <h4>Benutzer</h4>
         <span v-if="users.length>0">Zeige {{ users.length }} Benutzer</span>
         <span class="loading" v-if="loading">
-            ...lade Daten
+            lade Benutzer
         </span>
         <ul class="list-group">
             <router-link v-for="user in users" :to="'/users/' + user.id"

@@ -10,7 +10,7 @@
                 Zeige {{ pagingFrom }} bis {{ pagingTo }} von {{ paging.totalItems }} Einträgen
             </span>
             <span class="paging-text__loading" v-show="loading">
-                ...lade Daten
+                lade Einträge
             </span>
         </div>
 

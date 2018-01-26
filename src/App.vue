@@ -18,5 +18,11 @@
   }
 </script>
 
-<style scoped>
+<style lang="scss">
+    @import './assets/scss/custom-bootstrap.scss';
+    @import '../node_modules/bootstrap/scss/bootstrap.scss';
+</style>
+
+<style lang="css">
+    @import './assets/css/styles.css';
 </style>

@@ -2,7 +2,7 @@
     <div class="widget-articles">
         <slot name="title"><h4>Einträge</h4></slot>
         <div class="loading" v-if="loading">
-            Lade...
+            lade Einträge
         </div>
         <div class="list-group">
             <router-link v-for="article in articles" :to="'/articles/' + article.id"

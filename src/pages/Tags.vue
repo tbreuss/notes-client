@@ -7,7 +7,7 @@
                 Zeige {{ tags.length }} Tags
             </span>
             <span class="paging-text__loading" v-show="loading">
-                ...lade Daten
+                lade Tags
             </span>
         </div>
 

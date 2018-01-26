@@ -2,7 +2,7 @@
     <layout-default>
 
         <div v-if="loading" class="loading">
-            Lade...
+            Lade Artikel
         </div>
         <div v-else>
 

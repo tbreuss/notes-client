@@ -7,7 +7,6 @@ body {
     min-height: 100vh;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     line-height: 1.46rem;
-    color: #2a2a2a;
 }
 
 h1 {
@@ -33,8 +32,11 @@ ul {
     margin-bottom: 1.39rem;
 }
 
-a {
-    color: #07a; /*#1F89BA;*/
+.btn-secondary {
+    color: #fff;
+}
+.btn-secondary:hover {
+    color: #fff;
 }
 
 .list-group {
@@ -43,10 +45,6 @@ a {
 
 a.list-group-item {
     color: #222;
-}
-
-[v-cloak] {
-    color: red;
 }
 
 .layout-default {
@@ -233,6 +231,7 @@ body.login {
 
 .badge-secondary {
     background-color: #a6aeb6;
+    color: #fff;
 }
 
 .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
@@ -302,6 +301,20 @@ pre {
 /* loading dots */
 /* https://stackoverflow.com/questions/4639716/dot-dotdot-dotdotdot-as-loading-in-js */
 
+.loading,
+.paging-text__loading {
+    color: #aaa;
+    background-image: url(~@/assets/img/ajax-loader.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 12px 12px;
+    display: inline-block;
+    padding-left: 18px;
+    font-size:0.9rem;
+}
+
+
+/*
 .loading:after {
     content: '.';
     animation: dots 1s steps(5, end) infinite;
@@ -331,3 +344,4 @@ pre {
                 .5em 0 0 #2a2a2a;
     }
 }
+*/

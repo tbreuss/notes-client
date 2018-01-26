@@ -17,7 +17,6 @@ import router from '@/router'
 import http from '@/utils/http'
 
 import 'bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import 'prismjs/prism'
 // todo: import languages
 import 'prismjs/components/prism-bash'

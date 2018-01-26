@@ -3,7 +3,7 @@
         <h4 v-if="id>0">Eintrag bearbeiten</h4>
         <h4 v-else>Eintrag hinzufügen</h4>
         <div v-if="loading" class="loading">
-            Lade...
+            lade Artikel
         </div>
         <div v-else>
             <div class="form-group">
