@@ -1,4 +1,4 @@
-# Notes Management Tool – JavaScript Web Application 
+# Notes Management Tool – JavaScript Client
 
 This is a Notes Management Tool written in JavaScript using the vue.js framework.
 
@@ -16,22 +16,23 @@ Clone repo and install dependencies:
 
 Copy the example configuration files:
 
+    cd config
     cp dev.dist.js dev.env.js
     cp prod.dist.js prod.env.js
     cp test.dist.js test.env.js
 
-Open the files and edit the configuration settings.
+Open at least the `prod.env.js` file and add the API_URL.
 
 ## Run
 
     cd notes-client
     npm run dev
     
-Open the URL <http://localhost:8080> within your web browser. You should see the login screen.
+Open the URL <http://localhost:8080> with your web browser. You should see a login screen.
 
-Please refer to the server documentation on how to add a user to the database.
+Please refer to the server documentation on how to add a valid user to the notes database.
 
-## All npm commands
+## More npm commands
 
 ~~~bash
 # install dependencies
