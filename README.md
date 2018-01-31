@@ -1,10 +1,39 @@
-# wissen
+# Notes Management Tool – JavaScript Web Application 
 
-> Wissen
+This is a Notes Management Tool written in JavaScript using the vue.js framework.
 
-## Build Setup
+Note: This is the client only. You need the appropriate server which is hosted at <https://github.com/tbreuss/notes-server>.
 
-``` bash
+## Install
+
+Clone repo and install dependencies: 
+
+    git clone https://github.com/tbreuss/notes-client.git
+    cd notes-client
+    npm install
+
+## Config
+
+Copy the example configuration files:
+
+    cp dev.dist.js dev.env.js
+    cp prod.dist.js prod.env.js
+    cp test.dist.js test.env.js
+
+Open the files and edit the configuration settings.
+
+## Run
+
+    cd notes-client
+    npm run dev
+    
+Open the URL <http://localhost:8080> within your web browser. You should see the login screen.
+
+Please refer to the server documentation on how to add a user to the database.
+
+## All npm commands
+
+~~~bash
 # install dependencies
 npm install
 
@@ -25,10 +54,4 @@ npm run e2e
 
 # run all tests
 npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-
-Links
-
-<https://codeburst.io/using-vue-js-components-in-php-applications-e5bfde8763bc>
+~~~
