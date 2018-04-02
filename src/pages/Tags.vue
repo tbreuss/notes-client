@@ -12,7 +12,7 @@
         </div>
 
         <ul class="list-group">
-            <a v-for="tag in tags" @click="toArticles(tag.name, $event)" href="#"
+            <a v-for="tag in tags" @click="toArticles(tag.id, $event)" href="#"
                class="list-group-item d-flex justify-content-between align-items-center" :key="tag.id">
                 {{ tag.name}}
                 <span class="badge badge-secondary badge-pill">{{ tag.frequency }}</span>
