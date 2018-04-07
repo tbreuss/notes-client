@@ -39,18 +39,18 @@
         })
       },
       getUrl () {
-        let url = 'latest'
+        let url = 'articles/latest'
         if (this.mode == 'popular') {
-          url = 'popular'
+          url = 'articles/popular'
         }
         if (this.mode == 'latest') {
-          url = 'latest'
+          url = 'articles/latest'
         }
         if (this.mode == 'modified') {
-          url = 'modified'
+          url = 'articles/modified'
         }
         if (this.mode == 'liked') {
-          url = 'liked'
+          url = 'articles/liked'
         }
         return url
       }
