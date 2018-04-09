@@ -25,9 +25,13 @@
             <nav style="margin-top:20px" v-if="paging.pageCount>1">
                 <ul class="pagination justify-content-center">
                     <li v-bind:class="{ disabled: paging.currentPage <= 1, 'page-item': true}"><a
+                            class="page-link" @click="loadFirstPage" href="#">&laquo;</a></li>
+                    <li v-bind:class="{ disabled: paging.currentPage <= 1, 'page-item': true}"><a
                             class="page-link" @click="loadPrevPage" href="#">Vorherige Seite</a></li>
                     <li v-bind:class="{ disabled: paging.currentPage >= paging.pageCount, 'page-item': true}">
                         <a class="page-link" @click="loadNextPage" href="#">Nächste Seite</a></li>
+                    <li v-bind:class="{ disabled: paging.currentPage >= paging.pageCount, 'page-item': true}">
+                        <a class="page-link" @click="loadLastPage" href="#">&raquo;</a></li>
                 </ul>
             </nav>
         </div>
@@ -116,6 +120,11 @@
           this.loadTags()
         })
       },
+      loadFirstPage: function(event) {
+        event.preventDefault()
+        this.page = 1
+        this.loadArticles()
+      },
       loadPrevPage: function (event) {
         event.preventDefault()
         this.page = this.paging.currentPage - 1
@@ -124,6 +133,11 @@
       loadNextPage: function (event) {
         event.preventDefault()
         this.page = this.paging.currentPage + 1
+        this.loadArticles()
+      },
+      loadLastPage: function (event) {
+        event.preventDefault()
+        this.page = this.paging.pageCount
         this.loadArticles()
       },
       loadTags: function () {
