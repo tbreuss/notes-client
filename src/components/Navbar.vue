@@ -13,7 +13,7 @@
                     <router-link class="nav-link" to="/tags">Tags</router-link>
                 </li>
                 <li class="nav-item" v-if="hasPermission('article.add')">
-                    <router-link class="nav-link" to="/articles/add">Neu</router-link>
+                    <router-link class="nav-link" to="/articles/add">Eintrag hinzufügen</router-link>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
