@@ -17,7 +17,7 @@
         </div>
         <footer class="footer">
             <div class="container">
-                <span>&copy; 2018 Thomas Breuss &nbsp;|&nbsp;</span> <router-link to="/settings">App-Einstellungen</router-link>
+                <span>A tiny <a target="_blank" href="http://tebe.ch">tebe.ch</a> project</span>
             </div>
         </footer>
     </div>
