@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="aside-tags" v-if="tags.length > 0">
-                <h4 class="aside-tags__title">Tags</h4>
+                <h4 class="aside-tags__title">Filtern nach</h4>
                 <div v-for="(tag, index) in tags" class="custom-control custom-checkbox">
                     <input class="custom-control-input" :id="'aside-tags__check--' + tag.id" @change="loadArticles" type="checkbox" :value="tag.id" v-model="selectedTags">
                     <label class="custom-control-label" :for="'aside-tags__check--' + tag.id">{{ tag.name }}</label>
