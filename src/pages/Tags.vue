@@ -70,6 +70,8 @@
       toArticles (tag, e) {
         e.preventDefault()
         storage.setArticlesTags([tag])
+        storage.setArticlesPage(1)
+        storage.setArticlesSearch('')
         this.$router.push('/articles')
       }
     },
