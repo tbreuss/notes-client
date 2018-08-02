@@ -32,6 +32,11 @@ Open the URL <http://localhost:8080> with your web browser. You should see a log
 
 Please refer to the server documentation on how to add a valid user to the notes database.
 
+## Demo
+
+You can see a Demo running at: <https://notes.tebe.ch>
+Login details are "guest" with "guest".
+
 ## More npm commands
 
 ~~~bash
