@@ -77,10 +77,10 @@ export default {
 }
 
 function postLogin (params) {
-  var url = 'auth/login'
+  var url = 'login'
   var config = {
     headers: {
-      'Content-type': 'application/x-www-form-urlencoded'
+      //'Content-type': 'application/x-www-form-urlencoded'
     }
   }
   return http

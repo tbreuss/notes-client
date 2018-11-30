@@ -125,11 +125,11 @@
           })
       },
       insertArticle (article) {
-        http.post('add-article', article, () => {
+        http.post('articles', article, () => {
           this.$refs.submit.disabled = false
           this.$router.push('/articles')
         }, (error) => {
-          this.errors = error.response.data
+          this.errors = this.formatErrors(error.response.data)
           this.$refs.submit.disabled = false
         })
       },
@@ -139,7 +139,7 @@
           this.$refs.submit.disabled = false
           this.$router.push('/articles/' + this.id)
         }, (error) => {
-          this.errors = error.response.data
+          this.errors = this.formatErrors(error.response.data)
           this.$refs.submit.disabled = false
         })
       },
@@ -182,6 +182,13 @@
       },
       hasPermissionForUser (scope, userId) {
         return auth.hasPermissionForUser(scope, userId)
+      },
+      formatErrors(data) {
+        let errors = {};
+        data.forEach((error) => {
+          errors[error.field] = error.message;
+        })
+        return errors;
       }
     },
     mounted () {

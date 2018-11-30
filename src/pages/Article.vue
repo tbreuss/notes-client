@@ -95,7 +95,8 @@
           this.article = article
           this.loading = false
           this.parsed = markdown.parse(article.content)
-          this.$nextTick().then(() => Prism.highlightAll())
+          this.$nextTick().then(() => Prism.highlightAll()
+          )
         })
       },
       deleteArticle() {

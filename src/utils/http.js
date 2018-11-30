@@ -25,7 +25,7 @@ instance.interceptors.response.use(response => {
   //console.error("Axios response error", error.response)
   if (error.response.status == 404) {
     router.push({name: '404', params: {error: error.response}})
-  } else if (error.response.status > 401) {
+  } else if (error.response.status == 401) {
     router.push({name: 'error', params: {error: error.response}})
   }
   return Promise.reject(error)
@@ -38,12 +38,12 @@ export default {
     let config = {}
     if (['put', 'post'].indexOf(method) >= 0) {
       config.headers = {
-        'Content-type': 'application/x-www-form-urlencoded'
+        //'Content-type': 'application/x-www-form-urlencoded'
       }
     }
     return instance[method](url, data, config).then(
       (response) => {
-        successCb(response.data)
+        successCb(response.data, response.headers)
       },
       errorCb)
   },
@@ -53,10 +53,12 @@ export default {
   },
 
   post(url, data, successCb = null, errorCb = null) {
+    url += '?XDEBUG_SESSION_START';
     return this.request('post', url, data, successCb, errorCb)
   },
 
   put(url, data, successCb = null, errorCb = null) {
+    url += '?XDEBUG_SESSION_START';
     return this.request('put', url, data, successCb, errorCb)
   },
 
