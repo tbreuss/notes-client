@@ -13,7 +13,7 @@
             </div>
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea-upload :url="'/upload'" v-model="article.content" :class="getClass('content')" id="content" rows="10"
+                <textarea-upload :url="'/articles/upload'" v-model="article.content" :class="getClass('content')" id="content" rows="10"
                                  cols="10"></textarea-upload>
 
                 <small class="float-right">

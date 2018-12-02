@@ -19,6 +19,7 @@ import http from '@/utils/http'
 import 'bootstrap'
 import 'prismjs/prism'
 // todo: import languages
+import 'prismjs/components/prism-markup-templating'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-sql'
 import 'prismjs/components/prism-php'

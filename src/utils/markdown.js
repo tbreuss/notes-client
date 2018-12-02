@@ -7,7 +7,7 @@ export default {
   baseUrl() {
     let baseUrl = 'https://api.notes.tebe.ch/media/'
     if (process.env.NODE_ENV == 'development') {
-      baseUrl = 'http://localhost:9999/media/'
+      baseUrl = 'http://localhost:8888/media/'
     }
     return baseUrl
   },
