@@ -2,7 +2,7 @@
 
 This is a Notes Management Tool written in JavaScript using the vue.js framework.
 
-Note: This is the client only. You need the appropriate server which is hosted at <https://github.com/tbreuss/notes-server>.
+Note: This is the client only. You need the appropriate server which is hosted at <https://github.com/tbreuss/notes-api>.
 
 ## Install
 
@@ -35,7 +35,7 @@ Please refer to the server documentation on how to add a valid user to the notes
 ## Demo
 
 You can see a Demo running at: <https://notes.tebe.ch>  
-Login details are "guest" with "guest".
+Login details are "guest" with "guestguest".
 
 ## More npm commands
 
