@@ -110,9 +110,14 @@
         }
         params.page = this.page
         this.loading = true
-        http.get('articles', {params: params}, (data) => {
-          this.articles = data.articles
-          this.paging = data.paging
+        http.get('articles', {params: params}, (data, headers) => {
+          this.articles = data
+          this.paging = {
+            currentPage: parseInt(headers['x-pagination-current-page']),
+            pageCount: parseInt(headers['x-pagination-page-count']),
+            itemsPerPage: parseInt(headers['x-pagination-per-page']),
+            totalItems: parseInt(headers['x-pagination-total-count'])
+          }
           this.loading = false
           storage.setArticlesPage(this.page)
           storage.setArticlesSearch(this.q)
@@ -145,10 +150,10 @@
         if (this.q) {
           params.q = this.q
         }
-        if (this.selectedTags) {
+        if (this.selectedTags) {          
           params.tags = this.selectedTags
         }
-        http.get('selectedtags', {params: params}, (tags) => {
+        http.get('tags/selected', {params: params}, (tags) => {
           this.tags = tags
           storage.setArticlesTags(this.selectedTags)
         })
