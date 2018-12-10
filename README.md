@@ -34,8 +34,8 @@ Please refer to the server documentation on how to add a valid user to the notes
 
 ## Demo
 
-You can see a Demo running at: <https://notes.tebe.ch>  
-Login details are "guest" with "guestguest".
+You can see a demo running at: <https://notes.tebe.ch>.
+Login details are "guest / guest".
 
 ## More npm commands
 
