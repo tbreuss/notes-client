@@ -14,6 +14,8 @@
             <label for="password" class="sr-only">Passwort</label>
             <input v-on:focus="reset()" v-on:keyup.enter="login" v-model="form.password" :class="getClass('password')" type="password" id="password" placeholder="Passwort">
 
+            <p class="text-muted mt-2 mb-2" style="font-size:0.9rem">Guest login: guest / guest</p>
+
             <button type="button" class="btn btn-primary btn-block" @click="login" ref="loginBtn">Login</button>
 
             <div style="margin-top:1em" class="alert alert-danger" role="alert" v-if="errors.username || errors.password">Benutzername/Passwort falsch</div>
